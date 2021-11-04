@@ -20,6 +20,7 @@ abstract class ModelBase implements ISOModel
     const NODE_AS_CODE      = 'code';
     const NODE_AS_NAME      = 'name';
     const NODE_AS_ALL       = 'all';
+    const NODE_AS_NONE      = 'none';
 
 
     /**
@@ -86,8 +87,32 @@ abstract class ModelBase implements ISOModel
         if (!isset($this->nodeResolution[$node]))
             throw new ISONodeAttributeMissing('Node attribute is missing');
 
-        $this->nodeResolution[$node] = $format;
-        $this->cache = [];
+        if ($this->nodeResolution[$node] !== $format) {
+            $this->nodeResolution[$node] = $format;
+            $this->cache = [];
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get options.
+     *
+     * @return array|false[]
+     */
+    public function getOptions() : array {
+        return $this->options;
+    }
+
+
+    /**
+     * Set options.
+     *
+     * @param array $options
+     * @return $this
+     */
+    public function setOptions(array $options) : static {
+        $this->options = $options;
 
         return $this;
     }
@@ -105,7 +130,10 @@ abstract class ModelBase implements ISOModel
         string $node,
         Collection $modelData,
         array $codes,
-    ) : array {
+    ) : ?array {
+
+        if ($this->nodeResolution[$node] === self::NODE_AS_NONE)
+            return null;
 
         $list = [];
 

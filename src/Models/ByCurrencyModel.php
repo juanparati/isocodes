@@ -2,15 +2,13 @@
 
 namespace Juanparati\ISOCodes\Models;
 
-use Illuminate\Support\Collection;
 
-class ByCurrencyModel extends ModelBase
+class ByCurrencyModel extends ByNodeBase
 {
+    protected string $database = 'currencies';
 
-    public function list(): Collection
-    {
-        return collect(
-            $this->iso->getDatabaseInstance('currencies')->all()
-        );
-    }
+    protected array $assocNodes = [
+        'languages',
+        'continents',
+    ];
 }

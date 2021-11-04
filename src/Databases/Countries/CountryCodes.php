@@ -89,7 +89,7 @@ class CountryCodes extends ISODatabaseBase
             'alpha3'     => 'ATA',
             'numeric'    => '010',
             'tld'        => '.aq',
-            'currencies' => ['ARS', 'AUD', 'BGN', 'BRL', 'BYR', 'CLP', 'CNY', 'CZK', 'EUR', 'GBP', 'INR', 'JPY', 'KRW', 'NOK', 'NZD', 'PEN', 'PKR', 'PLN', 'RON', 'RUB', 'SEK', 'UAH', 'USD', 'UYU', 'ZAR',],
+            'currencies' => ['ARS', 'AUD', 'BGN', 'BRL', 'BYN', 'CLP', 'CNY', 'CZK', 'EUR', 'GBP', 'INR', 'JPY', 'KRW', 'NOK', 'NZD', 'PEN', 'PKR', 'PLN', 'RON', 'RUB', 'SEK', 'UAH', 'USD', 'UYU', 'ZAR',],
             'continents'  => ['AN'],
         ],
         'AG' => [
@@ -188,7 +188,7 @@ class CountryCodes extends ISODatabaseBase
             'alpha3'     => 'BLR',
             'numeric'    => '112',
             'tld'        => '.by',
-            'currencies' => ['BYR',],
+            'currencies' => ['BYN',],
             'languages'  => ['BE', 'RU'],
             'continents'  => ['EU'],
         ],
@@ -1627,7 +1627,7 @@ class CountryCodes extends ISODatabaseBase
             'alpha3'     => 'STP',
             'numeric'    => '678',
             'tld'        => '.st',
-            'currencies' => ['STD',],
+            'currencies' => ['STN',],
             'continents'  => ['AF'],
         ],
         'SA' => [
@@ -2031,7 +2031,7 @@ class CountryCodes extends ISODatabaseBase
             'numeric'    => '850',
             'tld'        => '.vi',
             'currencies' => ['USD',],
-            'continents'  => ['EU'],
+            'continents'  => ['NA'],
         ],
         'WF' => [
             'alpha2'     => 'WF',

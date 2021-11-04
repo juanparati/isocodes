@@ -5,28 +5,12 @@ namespace Juanparati\ISOCodes\Models;
 use Illuminate\Support\Collection;
 
 
-class ByLanguageModel extends ModelBase
+class ByLanguageModel extends ByNodeBase
 {
+    protected string $database = 'languages';
 
-    protected array $codesOpt = [
-        'currencies' => self::NODE_AS_CODE,
-        'languages'  => self::NODE_AS_CODE,
+    protected array $assocNodes = [
+        'currencies',
+        'continents',
     ];
-
-
-    public function all() : Collection
-    {
-
-    }
-
-
-    /**
-     * Return the list.
-     *
-     * @return Collection
-     */
-    public function list(): Collection
-    {
-        return collect($this->iso->getDatabaseInstance('languages')->all());
-    }
 }

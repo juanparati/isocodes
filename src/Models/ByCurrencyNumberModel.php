@@ -4,17 +4,40 @@ namespace Juanparati\ISOCodes\Models;
 
 use Illuminate\Support\Collection;
 
-class ByCurrencyNumberModel extends ModelBase
+class ByCurrencyNumberModel extends ByCurrencyModel
 {
+    protected string $database = 'currencyNumbers';
 
-    /**
-     *
-     * @return Collection
-     */
-    public function list(): Collection
+    protected array $assocNodes = [
+        'languages',
+        'continents',
+    ];
+
+    public function all(): Collection
     {
-        return collect(
-            (new $this->models['currencyNumbers'])->all()
-        );
+        $countries = $this->iso->byCountry()->setCurrencyAsNumber(true);
+
+        foreach ($this->nodeResolution as $nodeName => $nodeFormat)
+            $countries->setResolution($nodeName, $nodeFormat);
+
+        $list = $this->list();
+        $list = $this->iso->byCurrency()
+            ->list()
+            ->mapWithKeys(fn($cur, $key) => [$list[$key] => $cur]);
+
+        return $countries->all()
+            ->groupBy('currencies')
+            ->map(function ($cur, $code) use ($list) {
+                $base = [
+                    'code'       => (string) $code,
+                    'name'       => $list[$code] ?? null,
+                    'countries'  => $cur,
+                ];
+
+                foreach ($this->assocNodes as $assocNode)
+                    $base[$assocNode] = $cur->pluck($assocNode)->filter()->collapse()->unique();
+
+                return $base;
+            });
     }
 }

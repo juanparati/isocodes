@@ -8,7 +8,6 @@ use Illuminate\Support\Str;
 class ByCountryModel extends ModelBase
 {
 
-
     /**
      * Search by Alpha2.
      *
@@ -41,9 +40,9 @@ class ByCountryModel extends ModelBase
      * @param $number
      * @return array|null
      */
-    public function byNumber($number) : ?array {
+    public function byNumberic($number) : ?array {
         return $this->all()
-            ->where('number', $number)
+            ->where('numeric', $number)
             ->first();
     }
 
@@ -56,7 +55,7 @@ class ByCountryModel extends ModelBase
      */
     public function byTld(string $tld) : ?array {
         $tld = Str::of($tld)
-            ->start($tld, '.')
+            ->start('.')
             ->lower();
 
         return $this->all()
@@ -76,34 +75,37 @@ class ByCountryModel extends ModelBase
             return $collection;
 
         $nodeData = [
-            'languages' => $this->iso->byLanguage()->list(),
+            'languages'  => $this->iso->byLanguage()->list(),
             'continents' => $this->iso->byContinent()->list(),
+            'currencies' => $this->iso->byCurrency()->list()
         ];
 
-        $list = $this->list();
+        $currencyNumbers = $this->iso->byCurrencyNumber()->list();
 
-        if ($this->options['currencyAsNumber']) {
-            $nodeData['currencies'] = $this->iso->byCurrencyNumber()->list();
-
-            $list = $list->map(function ($country) use ($nodeData) {
-                foreach ($country['currencies'] as &$currencyCode)
-                    $currencyCode = $nodeData['currencies'][$currencyCode];
-
-                return $country;
-            });
-        }
-        else
-            $nodeData['currencies'] = $this->iso->byCurrency()->list();
-
-        $list = $list->map(function ($country) use ($nodeData) {
+        $list = $this->list()->map(function ($country) use ($nodeData, $currencyNumbers) {
 
             foreach (array_keys($this->nodeResolution) as $nodeName) {
                 if (isset($country[$nodeName])) {
-                    $country[$nodeName] = $this->resolveNodeData(
+                    $data = $this->resolveNodeData(
                         $nodeName,
                         $nodeData[$nodeName],
                         $country[$nodeName]
                     );
+
+                    if ($data === null)
+                        unset($country[$nodeName]);
+                    else {
+
+                        if ($this->options['currencyAsNumber'] && $nodeName === 'currencies') {
+
+                            $data = match ($this->nodeResolution['currencies']) {
+                                static::NODE_AS_CODE => array_map(fn($cur) => (string) $currencyNumbers[$cur], $data),
+                                static::NODE_AS_ALL  => collect($data)->mapWithKeys(fn($name, $cur) => [(string) $currencyNumbers[$cur] => $name])->toArray(),
+                            };
+                        }
+
+                        $country[$nodeName] = $data;
+                    }
                 }
             }
 
