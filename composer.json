@@ -4,8 +4,7 @@
     "type": "library",
     "require": {
         "php": "^8.0",
-        "illuminate/support": "^8.68",
-        "symfony/cache": "^5.3"
+        "illuminate/support": "^8.68"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5"
@@ -18,6 +17,9 @@
         }
     ],
     "minimum-stability": "stable",
+    "scripts": {
+        "test": "./vendor/bin/phpunit"
+    },
     "autoload": {
         "psr-4": {
             "Juanparati\\ISOCodes\\": "src"
@@ -35,7 +37,7 @@
             ]
         },
         "aliases": {
-            "Kickbox": "Juanparati\\ISOCodes\\Facades\\ISOCodesFacade"
+            "ISOCodes": "Juanparati\\ISOCodes\\Facades\\ISOCodesFacade"
         }
     }
 }

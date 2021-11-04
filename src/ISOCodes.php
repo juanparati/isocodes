@@ -6,13 +6,16 @@ namespace Juanparati\ISOCodes;
 use Juanparati\ISOCodes\Contracts\ISODatabase;
 use Juanparati\ISOCodes\Contracts\ISOModel;
 use Juanparati\ISOCodes\Exceptions\ISOModelNotFound;
-use Juanparati\ISOCodes\Models\ByCountryModel;
-use Psr\SimpleCache\CacheInterface;
-use Symfony\Component\Cache\Adapter\ArrayAdapter;
 
 
 /**
  * Provide the main ISOCodes objects.
+ *
+ * @method \Juanparati\ISOCodes\Models\ByContinentModel byContinent
+ * @method \Juanparati\ISOCodes\Models\ByCountryModel byCountry
+ * @method \Juanparati\ISOCodes\Models\ByCurrencyModel byCurrency
+ * @method \Juanparati\ISOCodes\Models\ByCurrencyNumberModel byCurrencyNumber
+ * @method \Juanparati\ISOCodes\Models\ByLanguageModel byLanguage
  */
 class ISOCodes
 {
@@ -52,7 +55,6 @@ class ISOCodes
      * Constructor.
      *
      * @param array $databases
-     * @param CacheInterface|null $cache
      */
     public function __construct(array $databases = []) {
         $this->databases = array_merge($this->databases, $databases);
