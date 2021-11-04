@@ -16,7 +16,7 @@ This library provides localized names for countries, currencies and languages. T
 
 ## Composer
 
-    composer require juanparati/isocodes
+    composer require juanparati/iso-codes
 
 ## Laravel
 
