@@ -42,6 +42,7 @@ Publish configuration file (Required only when custom locales are required):
 
 The collection of results are returned as [Collections](https://laravel.com/docs/8.x/collections#method-flip).
 
+### byCountry
 
 Get the list of all country codes:
 
@@ -94,11 +95,30 @@ Retrieve all the countries located in Europe:
         ->whereIn('continents', ['EU']);
 
 
-Retrieve all the countries that uses euro and sorted by numeric code descending:
+Retrieve all the countries sorted by numeric code descending that uses *only* Euro as currency:
 
     (new ISOCodes)
         ->byCountry()
         ->all()
-        ->whereIn('currencies', ['EUR'])
+        ->where('currencies', ['EUR'])
         ->sortByDesc('numeric');
-    
+
+
+Retrieve all the countries that uses *at least* Euro as currency:
+
+    (new ISOCodes)
+        ->byCountry()
+        ->all()
+        ->filter(fn($cur) => in_array('EUR', $cur['currencies']));
+
+
+Create a list of countries with their names (useful for a dynamic listbox):
+
+    (new ISOCodes)
+        ->byCountry()
+        ->map(fn ($iso) => [
+            'label' => $iso['name'] . ' (' . $iso['alpha2'] . ')',
+            'value' => $iso['alpha2']
+        ])
+        ->sortBy('label')
+        ->values();

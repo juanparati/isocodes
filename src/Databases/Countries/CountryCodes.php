@@ -1749,7 +1749,7 @@ class CountryCodes extends ISODatabaseBase
             'numeric'    => '724',
             'tld'        => '.es',
             'currencies' => ['EUR',],
-            'languages'  => ['ES'],
+            'languages'  => ['ES', 'CA', 'GL', 'EU'],
             'continents'  => ['EU'],
         ],
         'LK' => [
