@@ -7,7 +7,6 @@ use Juanparati\ISOCodes\ISOCodes;
 
 interface ISOModel
 {
-
     /**
      * Constructor.
      *
@@ -21,6 +20,5 @@ interface ISOModel
      *
      * @return array
      */
-    public function list() : Collection;
-
+    public function list(): Collection;
 }

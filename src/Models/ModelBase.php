@@ -7,20 +7,18 @@ use Juanparati\ISOCodes\Contracts\ISOModel;
 use Juanparati\ISOCodes\Exceptions\ISONodeAttributeMissing;
 use Juanparati\ISOCodes\ISOCodes;
 
-
 /**
  * Base class used by the models.
  */
 abstract class ModelBase implements ISOModel
 {
-
     /**
      * Subnode resolution formats.
      */
-    const NODE_AS_CODE      = 'code';
-    const NODE_AS_NAME      = 'name';
-    const NODE_AS_ALL       = 'all';
-    const NODE_AS_NONE      = 'none';
+    public const NODE_AS_CODE      = 'code';
+    public const NODE_AS_NAME      = 'name';
+    public const NODE_AS_ALL       = 'all';
+    public const NODE_AS_NONE      = 'none';
 
 
     /**
@@ -58,7 +56,9 @@ abstract class ModelBase implements ISOModel
      *
      * @param ISOCodes $iso
      */
-    public function __construct(protected ISOCodes $iso) {}
+    public function __construct(protected ISOCodes $iso)
+    {
+    }
 
 
     /**
@@ -82,10 +82,11 @@ abstract class ModelBase implements ISOModel
      * @return $this
      * @throws ISONodeAttributeMissing
      */
-    public function setResolution(string $node, string $format = self::NODE_AS_CODE) {
-
-        if (!isset($this->nodeResolution[$node]))
+    public function setResolution(string $node, string $format = self::NODE_AS_CODE)
+    {
+        if (!isset($this->nodeResolution[$node])) {
             throw new ISONodeAttributeMissing('Node attribute is missing');
+        }
 
         if ($this->nodeResolution[$node] !== $format) {
             $this->nodeResolution[$node] = $format;
@@ -100,7 +101,8 @@ abstract class ModelBase implements ISOModel
      *
      * @return array|false[]
      */
-    public function getOptions() : array {
+    public function getOptions(): array
+    {
         return $this->options;
     }
 
@@ -111,7 +113,8 @@ abstract class ModelBase implements ISOModel
      * @param array $options
      * @return $this
      */
-    public function setOptions(array $options) : static {
+    public function setOptions(array $options): static
+    {
         $this->options = $options;
 
         return $this;
@@ -130,20 +133,21 @@ abstract class ModelBase implements ISOModel
         string $node,
         Collection $modelData,
         array $codes,
-    ) : ?array {
-
-        if ($this->nodeResolution[$node] === self::NODE_AS_NONE)
+    ): ?array {
+        if ($this->nodeResolution[$node] === self::NODE_AS_NONE) {
             return null;
+        }
 
         $list = [];
 
-        foreach($codes as $code) {
-            if ($this->nodeResolution[$node] === self::NODE_AS_CODE)
+        foreach ($codes as $code) {
+            if ($this->nodeResolution[$node] === self::NODE_AS_CODE) {
                 $list[] = $code;
-            else if ($this->nodeResolution[$node] === self::NODE_AS_NAME)
+            } elseif ($this->nodeResolution[$node] === self::NODE_AS_NAME) {
                 $list[] = $modelData[$code] ?? null;
-            else
+            } else {
                 $list[$code] = $modelData[$code] ?? null;
+            }
         }
 
         return $list;
@@ -156,7 +160,8 @@ abstract class ModelBase implements ISOModel
      * @param string $key
      * @param $values
      */
-    protected function setCache(string $key, $values) {
+    protected function setCache(string $key, $values)
+    {
         $this->cache[$this->getCacheKey() . '_' . $key] = $values;
     }
 
@@ -167,7 +172,8 @@ abstract class ModelBase implements ISOModel
      * @param string $key
      * @return Collection|null
      */
-    protected function getCache(string $key) {
+    protected function getCache(string $key)
+    {
         return $this->cache[$this->getCacheKey() . '_' . $key] ?? null;
     }
 
@@ -177,7 +183,8 @@ abstract class ModelBase implements ISOModel
      *
      * @return string
      */
-    protected function getCacheKey() : string {
+    protected function getCacheKey(): string
+    {
         return md5(serialize($this->options));
     }
 }

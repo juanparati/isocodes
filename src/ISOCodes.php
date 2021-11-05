@@ -2,11 +2,9 @@
 
 namespace Juanparati\ISOCodes;
 
-
 use Juanparati\ISOCodes\Contracts\ISODatabase;
 use Juanparati\ISOCodes\Contracts\ISOModel;
 use Juanparati\ISOCodes\Exceptions\ISOModelNotFound;
-
 
 /**
  * Provide the main ISOCodes objects.
@@ -19,7 +17,6 @@ use Juanparati\ISOCodes\Exceptions\ISOModelNotFound;
  */
 class ISOCodes
 {
-
     /**
      * Registered databases.
      *
@@ -56,7 +53,8 @@ class ISOCodes
      *
      * @param array $databases
      */
-    public function __construct(array $databases = []) {
+    public function __construct(array $databases = [])
+    {
         $this->databases = array_merge($this->databases, $databases);
     }
 
@@ -69,15 +67,16 @@ class ISOCodes
      * @return ISOModel
      * @throws ISOModelNotFound
      */
-    public function __call(string $name, array $args) {
-
+    public function __call(string $name, array $args)
+    {
         $model = '\\Juanparati\\ISOCodes\\Models\\' . ucfirst($name) . 'Model';
 
         if (!isset($this->modelInstances[$model])) {
-            if (class_exists($model))
+            if (class_exists($model)) {
                 $this->modelInstances[$model] = new $model($this);
-            else
+            } else {
                 throw new ISOModelNotFound($model . ' not found');
+            }
         }
 
         return $this->modelInstances[$model];
@@ -90,9 +89,11 @@ class ISOCodes
      * @param string
      * @return ISODatabase
      */
-    public function getDatabaseInstance(string $key) : ISODatabase {
-        if (!isset($this->databaseInstances[$key]))
-            $this->databaseInstances[$key] = new $this->databases[$key];
+    public function getDatabaseInstance(string $key): ISODatabase
+    {
+        if (!isset($this->databaseInstances[$key])) {
+            $this->databaseInstances[$key] = new $this->databases[$key]();
+        }
 
         return $this->databaseInstances[$key];
     }

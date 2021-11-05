@@ -2,4 +2,6 @@
 
 namespace Juanparati\ISOCodes\Exceptions;
 
-class ISONodeAttributeMissing extends \Exception {}
+class ISONodeAttributeMissing extends \Exception
+{
+}

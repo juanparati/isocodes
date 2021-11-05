@@ -7,7 +7,6 @@ use Juanparati\ISOCodes\ISOCodes;
 
 class ISOCodesProvider extends ServiceProvider
 {
-
     /**
      * Bootstrap service.
      *
@@ -29,5 +28,4 @@ class ISOCodesProvider extends ServiceProvider
             return new ISOCodes($this->app['config']['isocodes'] ?? []);
         });
     }
-
 }

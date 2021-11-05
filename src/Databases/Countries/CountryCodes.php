@@ -4,7 +4,6 @@ namespace Juanparati\ISOCodes\Databases\Countries;
 
 use Juanparati\ISOCodes\Databases\ISODatabaseBase;
 
-
 /**
  * List of country codes with their ISO 3166-1 alpha-2, alpha3, numeric code and TLD.
  *
@@ -15,7 +14,6 @@ use Juanparati\ISOCodes\Databases\ISODatabaseBase;
  */
 class CountryCodes extends ISODatabaseBase
 {
-
     protected array $db = [
         'AF' => [
             'alpha2'     => 'AF',
@@ -2074,6 +2072,4 @@ class CountryCodes extends ISODatabaseBase
             'continents'  => ['AF'],
         ],
     ];
-
-
 }

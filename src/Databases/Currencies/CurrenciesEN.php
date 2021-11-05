@@ -11,7 +11,6 @@ use Juanparati\ISOCodes\Databases\ISODatabaseBase;
  */
 class CurrenciesEN extends ISODatabaseBase
 {
-
     protected array $db = [
         'AED' => 'UAE Dirham',
         'AFN' => 'Afghani',
@@ -182,5 +181,4 @@ class CurrenciesEN extends ISODatabaseBase
         'ZMW' => 'Zambian Kwacha',
         'ZWL' => 'Zimbabwe Dollar',
     ];
-
 }

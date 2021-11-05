@@ -4,7 +4,6 @@ namespace Juanparati\ISOCodes\Databases;
 
 use Juanparati\ISOCodes\Contracts\ISODatabase;
 
-
 /**
  * Base class used for databases.
  */

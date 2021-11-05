@@ -7,14 +7,14 @@ use Illuminate\Support\Str;
 
 class ByCountryModel extends ModelBase
 {
-
     /**
      * Search by Alpha2.
      *
      * @param string $alpha2
      * @return array|null
      */
-    public function byAlpha2(string $alpha2) : ?array {
+    public function byAlpha2(string $alpha2): ?array
+    {
         return $this->all()
             ->where('alpha2', strtoupper($alpha2))
             ->first();
@@ -27,7 +27,8 @@ class ByCountryModel extends ModelBase
      * @param string $alpha3
      * @return array|null
      */
-    public function byAlpha3(string $alpha3) : ?array {
+    public function byAlpha3(string $alpha3): ?array
+    {
         return $this->all()
             ->where('alpha3', strtoupper($alpha3))
             ->first();
@@ -40,7 +41,8 @@ class ByCountryModel extends ModelBase
      * @param $number
      * @return array|null
      */
-    public function byNumberic($number) : ?array {
+    public function byNumberic($number): ?array
+    {
         return $this->all()
             ->where('numeric', $number)
             ->first();
@@ -53,7 +55,8 @@ class ByCountryModel extends ModelBase
      * @param string $tld
      * @return array|null
      */
-    public function byTld(string $tld) : ?array {
+    public function byTld(string $tld): ?array
+    {
         $tld = Str::of($tld)
             ->start('.')
             ->lower();
@@ -69,10 +72,11 @@ class ByCountryModel extends ModelBase
      *
      * @return Collection
      */
-    public function all() : Collection
+    public function all(): Collection
     {
-        if ($collection = $this->getCache('all'))
+        if ($collection = $this->getCache('all')) {
             return $collection;
+        }
 
         $nodeData = [
             'languages'  => $this->iso->byLanguage()->list(),
@@ -83,7 +87,6 @@ class ByCountryModel extends ModelBase
         $currencyNumbers = $this->iso->byCurrencyNumber()->list();
 
         $list = $this->list()->map(function ($country) use ($nodeData, $currencyNumbers) {
-
             foreach (array_keys($this->nodeResolution) as $nodeName) {
                 if (isset($country[$nodeName])) {
                     $data = $this->resolveNodeData(
@@ -92,15 +95,13 @@ class ByCountryModel extends ModelBase
                         $country[$nodeName]
                     );
 
-                    if ($data === null)
+                    if ($data === null) {
                         unset($country[$nodeName]);
-                    else {
-
+                    } else {
                         if ($this->options['currencyAsNumber'] && $nodeName === 'currencies') {
-
                             $data = match ($this->nodeResolution['currencies']) {
-                                static::NODE_AS_CODE => array_map(fn($cur) => (string) $currencyNumbers[$cur], $data),
-                                static::NODE_AS_ALL  => collect($data)->mapWithKeys(fn($name, $cur) => [(string) $currencyNumbers[$cur] => $name])->toArray(),
+                                static::NODE_AS_CODE => array_map(fn ($cur) => (string) $currencyNumbers[$cur], $data),
+                                static::NODE_AS_ALL  => collect($data)->mapWithKeys(fn ($name, $cur) => [(string) $currencyNumbers[$cur] => $name])->toArray(),
                             };
                         }
 
@@ -125,8 +126,9 @@ class ByCountryModel extends ModelBase
      */
     public function list(): Collection
     {
-        if ($collection = $this->getCache('list'))
+        if ($collection = $this->getCache('list')) {
             return $collection;
+        }
 
         $countryNames = $this->iso->getDatabaseInstance('countries')->all();
 

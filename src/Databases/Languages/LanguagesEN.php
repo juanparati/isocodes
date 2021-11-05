@@ -11,7 +11,6 @@ use Juanparati\ISOCodes\Databases\ISODatabaseBase;
  */
 class LanguagesEN extends ISODatabaseBase
 {
-
     protected array $db = [
         'AA' => 'Afar',
         'AB' => 'Abkhazian',
@@ -197,6 +196,4 @@ class LanguagesEN extends ISODatabaseBase
         'ZH' => 'Chinese',
         'ZU' => 'Zulu',
     ];
-
-
 }

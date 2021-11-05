@@ -6,7 +6,6 @@ use Illuminate\Support\Collection;
 
 abstract class ByNodeBase extends ModelBase
 {
-
     /**
      * Database used by the model.
      *
@@ -38,7 +37,8 @@ abstract class ByNodeBase extends ModelBase
      * @return array|null
      * @throws \Juanparati\ISOCodes\Exceptions\ISONodeAttributeMissing
      */
-    public function byCode(string $code) : ?array {
+    public function byCode(string $code): ?array
+    {
         return $this->all()
             ->where('code', strtoupper($code))
             ->first();
@@ -51,12 +51,13 @@ abstract class ByNodeBase extends ModelBase
      * @return Collection
      * @throws \Juanparati\ISOCodes\Exceptions\ISONodeAttributeMissing
      */
-    public function all() : Collection
+    public function all(): Collection
     {
         $countries = $this->iso->ByCountry()->setOptions($this->options);
 
-        foreach ($this->nodeResolution as $nodeName => $nodeFormat)
+        foreach ($this->nodeResolution as $nodeName => $nodeFormat) {
             $countries->setResolution($nodeName, $nodeFormat);
+        }
 
         $list = $this->list();
 
@@ -69,8 +70,9 @@ abstract class ByNodeBase extends ModelBase
                     'countries'  => $cur,
                 ];
 
-                foreach ($this->assocNodes as $assocNode)
+                foreach ($this->assocNodes as $assocNode) {
                     $base[$assocNode] = $cur->pluck($assocNode)->filter()->collapse()->unique();
+                }
 
                 return $base;
             });
@@ -88,5 +90,4 @@ abstract class ByNodeBase extends ModelBase
             $this->iso->getDatabaseInstance($this->database)->all()
         );
     }
-
 }

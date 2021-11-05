@@ -18,4 +18,6 @@ return [
         'currencyNumbers'=> \Juanparati\ISOCodes\Databases\Currencies\CurrencyNumbers::class,
         'languages'      => \Juanparati\ISOCodes\Databases\Languages\LanguagesEN::class,
         'continents'     => \Juanparati\ISOCodes\Databases\Continents\ContinentsEN::class,
-    ]
+    ],
+
+];

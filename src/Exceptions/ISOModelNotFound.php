@@ -2,4 +2,6 @@
 
 namespace Juanparati\ISOCodes\Exceptions;
 
-class ISOModelNotFound extends \Exception {}
+class ISOModelNotFound extends \Exception
+{
+}

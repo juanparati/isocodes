@@ -7,5 +7,5 @@ namespace Juanparati\ISOCodes\Contracts;
  */
 interface ISODatabase
 {
-    public function all() : array;
+    public function all(): array;
 }
