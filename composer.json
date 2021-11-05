@@ -33,7 +33,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Juanparati\\ISOCodes\\Providers\\ISOCodesServiceProvider"
+                "Juanparati\\ISOCodes\\Providers\\ISOCodesProvider"
             ]
         },
         "aliases": {
