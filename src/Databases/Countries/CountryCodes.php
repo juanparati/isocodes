@@ -16,11 +16,12 @@ class CountryCodes extends ISODatabaseBase
 {
     protected array $db = [
         'AF' => [
-            'alpha2'     => 'AF',
-            'alpha3'     => 'AFG',
-            'numeric'    => '004',
-            'tld'        => '.af',
-            'currencies' => ['AFN',],
+            'alpha2'      => 'AF',
+            'alpha3'      => 'AFG',
+            'numeric'     => '004',
+            'tld'         => '.af',
+            'currencies'  => ['AFN',],
+            'languages'   => ['PS'],
             'continents'  => ['AS'],
         ],
         'AX' => [
