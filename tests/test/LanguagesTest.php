@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 class LanguagesTest extends TestCase
 {
 
-    public function testAllCurrencies() {
+    public function testAllLanguages() {
         $iso = new ISOCodes();
         $cont = $iso->byLanguage()->all();
 
@@ -16,8 +16,9 @@ class LanguagesTest extends TestCase
     }
 
 
-    public function testByCurrencyCode() {
+    public function testByLanguageCode() {
         $iso = new ISOCodes();
+
         $cont = $iso->byLanguage()->byCode('ES');
 
         $this->assertArrayHasKey('countries', $cont);

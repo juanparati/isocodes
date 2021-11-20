@@ -109,13 +109,14 @@ Retrieve all the countries sorted by numeric code descending that uses *only* Eu
         ->where('currencies', ['EUR'])
         ->sortByDesc('numeric');
 
-
 Retrieve all the countries that uses *at least* Euro as currency:
 
     (new ISOCodes)
         ->byCountry()
         ->all()
         ->filter(fn($iso) => in_array('EUR', $iso['currencies']));
+
+alternatively is also get a list 
 
 
 Create a list of countries with their names (useful for a dynamic listbox):
@@ -143,7 +144,7 @@ Retrieve a list of countries which national language is Spanish:
 
 Get the list grouped by language:
 
-    (new ISOCodes)->byCountry()->all()->toArray();
+    (new ISOCodes)->byLanguage()->all()->toArray();
 
 It returns something like:
 
