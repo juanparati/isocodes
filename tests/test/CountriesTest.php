@@ -11,16 +11,19 @@ class CountriesTest extends TestCase
 {
 
     protected array $testCountry = [
-        'name'       => 'Spain',
-        'alpha2'     => 'ES',
-        'alpha3'     => 'ESP',
-        'numeric'    => '724',
-        'tld'        => '.es',
+        'name'        => 'Spain',
+        'alpha2'      => 'ES',
+        'alpha3'      => 'ESP',
+        'numeric'     => '724',
+        'tld'         => '.es',
+        'capital'     => 'Madrid',
+        'flag'        => '🇪🇸',
+        'phone_code'  => '34',
     ];
 
     protected array $testNodeCode = [
         'currencies' => ['EUR'],
-        'languages'  => ['ES'],
+        'languages'  => ['ES', 'CA', 'GL', 'EU'],
         'continents' => ['EU'],
     ];
 
@@ -28,8 +31,11 @@ class CountriesTest extends TestCase
         'currencies' => [
             'EUR' => 'Euro'
         ],
-        'languages' => [
-            'ES'  => 'Spanish'
+        'languages'  => [
+            'ES' => 'Spanish',
+            'CA' => 'Catalan',
+            'GL' => 'Galician',
+            'EU' => 'Basque'
         ],
         'continents' => [
             'EU' => 'Europe'
@@ -40,8 +46,11 @@ class CountriesTest extends TestCase
         'currencies' => [
             'Euro'
         ],
-        'languages' => [
-            'Spanish'
+        'languages'  => [
+            'Spanish',
+            'Catalan',
+            'Galician',
+            'Basque'
         ],
         'continents' => [
             'Europe'
@@ -52,7 +61,8 @@ class CountriesTest extends TestCase
     /**
      * Test retrieving all countries.
      */
-    public function testAllCountries() {
+    public function testAllCountries()
+    {
 
         $iso = new ISOCodes();
 
@@ -68,8 +78,12 @@ class CountriesTest extends TestCase
             $this->assertArrayHasKey('alpha3', $country);
             $this->assertArrayHasKey('tld', $country);
             $this->assertArrayHasKey('currencies', $country);
+            $this->assertArrayHasKey('languages', $country);
             $this->assertArrayHasKey('continents', $country);
             $this->assertArrayHasKey('name', $country);
+            $this->assertArrayHasKey('flag', $country);
+            $this->assertArrayHasKey('phone_code', $country);
+
         }
     }
 
@@ -77,7 +91,8 @@ class CountriesTest extends TestCase
     /**
      * Test by Alpha2.
      */
-    public function testByAlpha2() {
+    public function testByAlpha2()
+    {
         $iso = new ISOCodes();
 
         $country = $iso->byCountry()->byAlpha2('foo');
@@ -89,7 +104,7 @@ class CountriesTest extends TestCase
         $country = $iso->byCountry()
             ->setResolution('currencies', ByCountryModel::NODE_AS_ALL)
             ->setResolution('continents', ByCountryModel::NODE_AS_ALL)
-            ->setResolution('languages' , ByCountryModel::NODE_AS_ALL)
+            ->setResolution('languages', ByCountryModel::NODE_AS_ALL)
             ->byAlpha2('es');
 
         $this->assertCountry($this->testNodeAll + $this->testCountry, $country);
@@ -97,7 +112,7 @@ class CountriesTest extends TestCase
         $country = $iso->byCountry()
             ->setResolution('currencies', ByCountryModel::NODE_AS_NAME)
             ->setResolution('continents', ByCountryModel::NODE_AS_NAME)
-            ->setResolution('languages' , ByCountryModel::NODE_AS_NAME)
+            ->setResolution('languages', ByCountryModel::NODE_AS_NAME)
             ->byAlpha2('es');
 
         $this->assertCountry($this->testNodeName + $this->testCountry, $country);
@@ -105,7 +120,7 @@ class CountriesTest extends TestCase
         $country = $iso->byCountry()
             ->setResolution('currencies', ByCountryModel::NODE_AS_NONE)
             ->setResolution('continents', ByCountryModel::NODE_AS_NONE)
-            ->setResolution('languages' , ByCountryModel::NODE_AS_NONE)
+            ->setResolution('languages', ByCountryModel::NODE_AS_NONE)
             ->byAlpha2('es');
 
         $this->assertArrayNotHasKey('countries', $country);
@@ -118,7 +133,8 @@ class CountriesTest extends TestCase
     /**
      * Test by Alpha3.
      */
-    public function testByAlpha3() {
+    public function testByAlpha3()
+    {
         $iso = new ISOCodes();
 
         $country = $iso->byCountry()->byAlpha3('esp');
@@ -130,10 +146,11 @@ class CountriesTest extends TestCase
     /**
      * Test search by Numeric.
      */
-    public function testByNumberic() {
+    public function testByNumberic()
+    {
         $iso = new ISOCodes();
 
-        $country = $iso->byCountry()->byNumberic('724');
+        $country = $iso->byCountry()->byNumeric('724');
 
         $this->assertCountry($this->testNodeCode + $this->testCountry, $country);
     }
@@ -142,7 +159,8 @@ class CountriesTest extends TestCase
     /**
      * Test search by TLD.
      */
-    public function testByTld() {
+    public function testByTld()
+    {
         $iso = new ISOCodes();
 
         $country = $iso->byCountry()->byTld('ES');
@@ -154,9 +172,44 @@ class CountriesTest extends TestCase
 
 
     /**
+     * Test search by international phone code.
+     */
+    public function testByPhoneCode()
+    {
+        $iso = new ISOCodes();
+
+        $country = $iso->byCountry()->byPhoneCode(34);
+        $this->assertCountry($this->testNodeCode + $this->testCountry, $country);
+
+        $country = $iso->byCountry()->byPhoneCode('+34');
+        $this->assertCountry($this->testNodeCode + $this->testCountry, $country);
+
+        $country = $iso->byCountry()->byPhoneCode('34');
+        $this->assertCountry($this->testNodeCode + $this->testCountry, $country);
+    }
+
+
+    /**
+     * Test continent search.
+     */
+    public function testContinentSearch()
+    {
+        $iso = new ISOCodes();
+
+        $country = $iso->byCountry()
+            ->byContinent(['EU', 'AS'], true)
+            ->pluck('alpha2')
+            ->toArray();
+
+        $this->assertEquals(['CY', 'RU'], $country);
+    }
+
+
+    /**
      * Test currency as number.
      */
-    public function testCurrencyAsNumber() {
+    public function testCurrencyAsNumber()
+    {
         $iso = new ISOCodes();
 
         $country = $iso->byCountry()
@@ -180,7 +233,8 @@ class CountriesTest extends TestCase
      * @param array $expected
      * @param array $country
      */
-    protected function assertCountry(array $expected, array $country) {
+    protected function assertCountry(array $expected, array $country)
+    {
         foreach ($expected as $key => $value)
             $this->assertEquals($country[$key], $value);
     }

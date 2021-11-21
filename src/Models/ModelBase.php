@@ -56,9 +56,7 @@ abstract class ModelBase implements ISOModel
      *
      * @param ISOCodes $iso
      */
-    public function __construct(protected ISOCodes $iso)
-    {
-    }
+    public function __construct(protected ISOCodes $iso) {}
 
 
     /**

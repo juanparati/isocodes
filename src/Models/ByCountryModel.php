@@ -2,11 +2,17 @@
 
 namespace Juanparati\ISOCodes\Models;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use Juanparati\ISOCodes\Models\Extensions\NodeSearchable;
+
 
 class ByCountryModel extends ModelBase
 {
+
+    use NodeSearchable;
+
     /**
      * Search by Alpha2.
      *
@@ -16,8 +22,7 @@ class ByCountryModel extends ModelBase
     public function byAlpha2(string $alpha2): ?array
     {
         return $this->all()
-            ->where('alpha2', strtoupper($alpha2))
-            ->first();
+            ->firstWhere('alpha2', strtoupper($alpha2));
     }
 
 
@@ -30,8 +35,7 @@ class ByCountryModel extends ModelBase
     public function byAlpha3(string $alpha3): ?array
     {
         return $this->all()
-            ->where('alpha3', strtoupper($alpha3))
-            ->first();
+            ->firstWhere('alpha3', strtoupper($alpha3));
     }
 
 
@@ -41,11 +45,10 @@ class ByCountryModel extends ModelBase
      * @param $number
      * @return array|null
      */
-    public function byNumberic($number): ?array
+    public function byNumeric($number): ?array
     {
         return $this->all()
-            ->where('numeric', $number)
-            ->first();
+            ->firstWhere('numeric', $number);
     }
 
 
@@ -62,8 +65,60 @@ class ByCountryModel extends ModelBase
             ->lower();
 
         return $this->all()
-            ->where('tld', $tld)
-            ->first();
+            ->firstWhere('tld', $tld);
+    }
+
+
+    /**
+     * Search by phone code.
+     *
+     * @param $code
+     * @return array|null
+     */
+    public function byPhoneCode($code) : ?array
+    {
+        $code = is_string($code) ? ('+' === $code[0] ? substr($code, 1) : $code) : $code;
+
+        return $this->all()
+            ->firstWhere('phone_code', $code);
+    }
+
+    /**
+     * Search by language.
+     *
+     * @param string|array $language
+     * @param bool $exact
+     * @return Collection|null
+     */
+    public function byLanguage(string|array $language, bool $exact = false) : ?Collection
+    {
+        return $this->whereNodeHas('languages', $language, $exact);
+    }
+
+
+    /**
+     * Search by currency.
+     *
+     * @param string|array $currency
+     * @param bool $exact
+     * @return Collection|null
+     */
+    public function byCurrency(string|array $currency, bool $exact = false) : ?Collection
+    {
+        return $this->whereNodeHas('currencies', $currency, $exact);
+    }
+
+
+    /**
+     * Search by continent.
+     *
+     * @param string|array $continent
+     * @param bool $exact
+     * @return Collection|null
+     */
+    public function byContinent(string|array $continent, bool $exact = false) : ?Collection
+    {
+        return $this->whereNodeHas('continents', $continent, $exact);
     }
 
 

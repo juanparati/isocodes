@@ -2,7 +2,7 @@
 
 ## What is it?
 
-A PHP library inspired in that provides a list of structured ISO codes oriented to geography/geopolitical information.
+A PHP library that provides a list of structured ISO codes oriented to geography/geopolitical information.
 
 This library provides the following ISOs and codes:
 - [ISO 3166-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) (Geographical codes)
@@ -11,8 +11,12 @@ This library provides the following ISOs and codes:
 - [TLDs](https://en.wikipedia.org/wiki/Country_code_top-level_domain) (Regional TLD)
 - [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) (Currency codes)
 - [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (Language codes)
+- [International dialing codes](https://en.wikipedia.org/wiki/List_of_country_calling_codes)
+- [Unicode flags](https://en.wikipedia.org/wiki/Regional_indicator_symbol)
 
 This library provides localized names for countries, currencies and languages. The library allows to create custom/new locales.
+
+RDMS like MySQL or SQLite is not required in order to use this library. All the database files are maintained in separate files that are loaded on demand in a way that keep a low footprint.
 
 ### Disclaimer
 
@@ -59,10 +63,10 @@ It returns something like:
     [
     ...
         "AL"=> [
-            "alpha2" => "AL",
-            "alpha3" => "ALB",
-            "numeric" => "008",
-            "tld" => ".al",
+            "alpha2"     => "AL",
+            "alpha3"     => "ALB",
+            "numeric"    => "008",
+            "tld"        => ".al",
             "currencies" => Collection [
                 'ALL'
             ],
@@ -72,7 +76,10 @@ It returns something like:
             "continents" => Collection [
                 "EU",
             ],
-            "name" => "Albania"
+            "name"       => "Albania",
+            "capital"    => "Tirana",
+            "flag"       => "🇦🇱",
+            "phone_code" => "355",
         ]
     ...
     ];
@@ -83,8 +90,7 @@ Retrieve one specific country:
     (new ISOCodes)
         ->byCountry()
         ->all()
-        ->where('alpha2', 'ES')
-        ->first();
+        ->firstWhere('alpha2', 'ES');
 
 or
 
@@ -92,14 +98,29 @@ or
         ->byCountry()
         ->byAlpha2('ES');
 
-
 Retrieve all the countries located in Europe:
 
     (new ISOCodes)
         ->byCountry()
-        ->all()
-        ->whereIn('continents', ['EU']);
+        ->byContinent('EU');
 
+Retrieve all the countries located *only* in Europe:
+
+    (new ISOCodes)
+        ->byCountry()
+        ->byContinent('EU', true);
+
+Retrieve all the countries located in Europe and Asia:
+
+    (new ISOCodes)
+        ->byCountry()
+        ->byContinent(['EU', 'AS'], true);
+
+Retrieve all the countries located in Europe or Asia
+
+    (new ISOCodes)
+        ->byCountry()
+        ->byContinent(['EU', 'AS']);
 
 Retrieve all the countries sorted by numeric code descending that uses *only* Euro as currency:
 
@@ -109,14 +130,18 @@ Retrieve all the countries sorted by numeric code descending that uses *only* Eu
         ->where('currencies', ['EUR'])
         ->sortByDesc('numeric');
 
+or
+
+    (new ISOCodes)
+        ->byCountry()
+        ->byCurrency('EUR', true)
+        ->sortByDesc('numeric');
+
 Retrieve all the countries that uses *at least* Euro as currency:
 
     (new ISOCodes)
         ->byCountry()
-        ->all()
-        ->filter(fn($iso) => in_array('EUR', $iso['currencies']));
-
-alternatively is also get a list 
+        ->byCurrency('EUR');
 
 
 Create a list of countries with their names (useful for a dynamic listbox):
@@ -130,12 +155,11 @@ Create a list of countries with their names (useful for a dynamic listbox):
         ->sortBy('label')
         ->values();
 
-Retrieve a list of countries which national language is Spanish:
+Retrieve a list of countries that has Portuguese as one of their official languages:
 
     (new ISOCodes)
         ->byCountry()
-        ->all()
-        ->filter(fn($iso) => 'ES' === ($iso['languages'][0] ?? null));
+        ->byLanguage('PT');
 
 * Note that most spoken language should be always the first in the list.
 
@@ -231,36 +255,42 @@ Examples:
 returns the following:
 
     [
-        "alpha2" => "PT",
-        "alpha3" => "PRT",
-        "numeric" => "620",
-        "tld" => ".pt",
+        "alpha2"     => "PT",
+        "alpha3"     => "PRT",
+        "numeric"    => "620",
+        "tld"        => ".pt",
         "currencies" => [
             "EUR" => "Euro",
         ],
-        "languages" => [
+        "languages"  => [
             "Portuguese",
         ],
-        "name" => "Portugal",
+        "name"       => "Portugal",
+        "capital"    => "Lisboa",
+        "flag"       => "🇵🇹",
+        "phone_code" => "351",
     ]
 
 instead of:
 
     [
-        "alpha2" => "PT",
-        "alpha3" => "PRT",
-        "numeric" => "620",
-        "tld" => ".pt",
+        "alpha2"     => "PT",
+        "alpha3"     => "PRT",
+        "numeric"    => "620",
+        "tld"        => ".pt",
         "currencies" => [
             "EUR",
         ],
-        "languages" => [
+        "languages"  => [
             "PT",
         ],
         "continents" => [
             "EU",
         ],
-        "name" => "Portugal",
+        "name"       => "Portugal",
+        "capital"    => "Lisboa",
+        "flag"       => "🇵🇹",
+        "phone_code" => "351",
     ]
 
 The node resolutions works with the others models like "byCurrency", "byLanguage", etc.
