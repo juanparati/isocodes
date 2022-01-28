@@ -139,7 +139,7 @@ class CountriesTest extends TestCase
     public function testByNumberic() {
         $iso = new ISOCodes();
 
-        $country = $iso->byCountry()->byNumberic('724');
+        $country = $iso->byCountry()->byNumeric('724');
 
         $this->assertCountry($this->testNodeCode + $this->testCountry, $country);
     }
