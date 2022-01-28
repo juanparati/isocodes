@@ -160,6 +160,25 @@ class CountriesTest extends TestCase
 
 
     /**
+     * Test search by Name.
+     *
+     * @return void
+     */
+    public function testByName() {
+        $iso = new ISOCodes();
+
+        $country = $iso->byCountry()->byName('spain');
+        $this->assertCountry($this->testNodeCode + $this->testCountry, $country);
+
+        $country = $iso->byCountry()->byName('spAIn');
+        $this->assertCountry($this->testNodeCode + $this->testCountry, $country);
+
+        $country = $iso->byCountry()->byName('Lalandia');
+        $this->assertNull($country);
+    }
+
+
+    /**
      * Test currency as number.
      */
     public function testCurrencyAsNumber() {

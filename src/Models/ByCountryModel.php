@@ -123,6 +123,24 @@ class ByCountryModel extends ModelBase
 
 
     /**
+     * Search by name (Case insensitive).
+     *
+     * @param string $name
+     * @return array|null
+     */
+    public function byName(string $name ): ?array
+    {
+        $name = (string) Str::of($name)
+            ->lower()
+            ->trim();
+
+        return $this->all()
+            ->filter(fn($country) => $name === Str::lower($country['name']))
+            ->first();
+    }
+
+
+    /**
      * Return the list of all country codes with their nodes.
      *
      * @return Collection
