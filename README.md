@@ -309,3 +309,4 @@ Example:
 ## Contributions
 
 Feel free to add new locales to this library and send me a pull request.
+
