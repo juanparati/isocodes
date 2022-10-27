@@ -4,6 +4,7 @@
     "type": "library",
     "require": {
         "php": "^8.0",
+        "ext-ctype": "*",
         "illuminate/support": "^8.34.0|~v9.0"
     },
     "require-dev": {

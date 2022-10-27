@@ -1,13 +1,13 @@
 <?php
 
-namespace Juanparati\ISOCodes\Databases\Countries;
+namespace Juanparati\ISOCodes\Data\Countries;
 
-use Juanparati\ISOCodes\Databases\ISODatabaseBase;
+use Juanparati\ISOCodes\Data\ISODataBase;
 
 /**
  * List of countries (English).
  */
-class CountriesEN extends ISODatabaseBase
+class CountriesEN extends ISODataBase
 {
     protected array $db = [
      'AD' => 'Andorra',

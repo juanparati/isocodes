@@ -10,7 +10,7 @@ class CurrencyNumbersTest extends TestCase
 
     public function testAllCurrencies() {
         $iso = new ISOCodes();
-        $cont = $iso->byCurrencyNumber()->all();
+        $cont = $iso->currencyNumbers()->all();
 
         $this->assertGreaterThan(100, $cont->count());
 
@@ -23,7 +23,7 @@ class CurrencyNumbersTest extends TestCase
 
     public function testByCurrencyCode() {
         $iso = new ISOCodes();
-        $cont = $iso->byCurrencyNumber()->byCode('978');
+        $cont = $iso->currencyNumbers()->findByCode('978');
 
         $this->assertArrayHasKey('countries', $cont);
         $this->assertArrayHasKey('languages', $cont);

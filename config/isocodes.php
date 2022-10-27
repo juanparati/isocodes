@@ -7,17 +7,17 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Databases
+    | Datasets
     |--------------------------------------------------------------------------
     |
     */
-    'databases' => [
-        'countryCodes'   => \Juanparati\ISOCodes\Databases\Countries\CountryCodes::class,
-        'countries'      => \Juanparati\ISOCodes\Databases\Countries\CountriesEN::class,
-        'currencies'     => \Juanparati\ISOCodes\Databases\Currencies\CurrenciesEN::class,
-        'currencyNumbers'=> \Juanparati\ISOCodes\Databases\Currencies\CurrencyNumbers::class,
-        'languages'      => \Juanparati\ISOCodes\Databases\Languages\LanguagesEN::class,
-        'continents'     => \Juanparati\ISOCodes\Databases\Continents\ContinentsEN::class,
+    'datasets' => [
+        'countryCodes'   => \Juanparati\ISOCodes\Data\Countries\CountryCodes::class,
+        'countries'      => \Juanparati\ISOCodes\Data\Countries\CountriesEN::class,
+        'currencies'     => \Juanparati\ISOCodes\Data\Currencies\CurrenciesEN::class,
+        'currencyNumbers'=> \Juanparati\ISOCodes\Data\Currencies\CurrencyNumbers::class,
+        'languages'      => \Juanparati\ISOCodes\Data\Languages\LanguagesEN::class,
+        'continents'     => \Juanparati\ISOCodes\Data\Continents\ContinentsEN::class,
     ],
 
 ];

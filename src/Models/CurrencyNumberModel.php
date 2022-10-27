@@ -4,7 +4,7 @@ namespace Juanparati\ISOCodes\Models;
 
 use Illuminate\Support\Collection;
 
-class ByCurrencyNumberModel extends ByCurrencyModel
+class CurrencyNumberModel extends CurrencyModel
 {
     protected string $database = 'currencyNumbers';
 
@@ -13,22 +13,30 @@ class ByCurrencyNumberModel extends ByCurrencyModel
         'continents',
     ];
 
-    public function all(): Collection
+
+    /**
+     * Get all the currencies number codes.
+     *
+     * @param bool $asArray
+     * @return Collection
+     * @throws \Juanparati\ISOCodes\Exceptions\ISONodeAttributeMissing
+     */
+    public function all(bool $asArray = false): Collection
     {
-        $countries = $this->iso->byCountry()->setCurrencyAsNumber(true);
+        $countries = $this->iso->countries()->setCurrencyAsNumber(true);
 
         foreach ($this->nodeResolution as $nodeName => $nodeFormat) {
             $countries->setResolution($nodeName, $nodeFormat);
         }
 
         $list = $this->list();
-        $list = $this->iso->byCurrency()
+        $list = $this->iso->currencies()
             ->list()
             ->mapWithKeys(fn ($cur, $key) => [$list[$key] => $cur]);
 
         return $countries->all()
             ->groupBy('currencies')
-            ->map(function ($cur, $code) use ($list) {
+            ->map(function ($cur, $code) use ($list, $asArray) {
                 $base = [
                     'code'       => (string) $code,
                     'name'       => $list[$code] ?? null,
@@ -39,7 +47,7 @@ class ByCurrencyNumberModel extends ByCurrencyModel
                     $base[$assocNode] = $cur->pluck($assocNode)->filter()->collapse()->unique();
                 }
 
-                return $base;
+                return $asArray ? $base : new ModelRecord($base);
             });
     }
 }

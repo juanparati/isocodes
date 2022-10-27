@@ -5,7 +5,7 @@ namespace Juanparati\ISOCodes\Contracts;
 /**
  * Contract used by database classes.
  */
-interface ISODatabase
+interface ISODataContract
 {
     public function all(): array;
 }

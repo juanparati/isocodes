@@ -4,7 +4,7 @@ namespace Juanparati\ISOCodes\Models;
 
 use Illuminate\Support\Collection;
 
-class ByLanguageModel extends ByNodeBase
+class LanguageModel extends ModelBase
 {
     protected string $database = 'languages';
 

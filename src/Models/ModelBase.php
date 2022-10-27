@@ -3,186 +3,111 @@
 namespace Juanparati\ISOCodes\Models;
 
 use Illuminate\Support\Collection;
-use Juanparati\ISOCodes\Contracts\ISOModel;
+use Juanparati\ISOCodes\Contracts\ISOModelContract;
 use Juanparati\ISOCodes\Exceptions\ISONodeAttributeMissing;
-use Juanparati\ISOCodes\ISOCodes;
+use Juanparati\ISOCodes\Models\Extensions\CollectionMethodCallable;
 
-/**
- * Base class used by the models.
- */
-abstract class ModelBase implements ISOModel
+abstract class ModelBase extends BasicModelBase implements ISOModelContract
 {
+
+    use CollectionMethodCallable;
+
     /**
-     * Subnode resolution formats.
+     * Database used by the model.
+     *
+     * @var string
      */
-    public const NODE_AS_CODE      = 'code';
-    public const NODE_AS_NAME      = 'name';
-    public const NODE_AS_ALL       = 'all';
-    public const NODE_AS_NONE      = 'none';
+    protected string $database = '';
 
 
     /**
-     * Define node resolution formats.
+     * Grouped by.
+     *
+     * @var string
+     */
+    protected string $groupBy = '';
+
+
+    /**
+     * Nodes to associate.
      *
      * @var array
      */
-    protected array $nodeResolution = [
-        'currencies'  => self::NODE_AS_CODE,
-        'continents'  => self::NODE_AS_CODE,
-        'languages'   => self::NODE_AS_CODE,
-    ];
+    protected array $assocNodes = [];
 
 
     /**
-     * Cache.
+     * Search by continent code.
      *
-     * @var Collection[]
+     * @param string $code
+     * @return ModelRecord|null
+     * @throws \Juanparati\ISOCodes\Exceptions\ISONodeAttributeMissing
      */
-    protected array $cache = [];
-
-
-    /**
-     * Model options.
-     *
-     * @var array
-     */
-    protected array $options = [
-        'currencyAsNumber' => false
-    ];
-
-
-    /**
-     * Constructor.
-     *
-     * @param ISOCodes $iso
-     */
-    public function __construct(protected ISOCodes $iso) {}
-
-
-    /**
-     * Define when the currency is returned as number instead of code.
-     *
-     * @param bool $state
-     * @return $this
-     */
-    public function setCurrencyAsNumber(bool $state): static
+    public function findByCode(string $code): ?ModelRecord
     {
-        $this->options['currencyAsNumber'] = $state;
-        return $this;
+        return $this
+            ->all()
+            ->where('code', strtoupper($code))
+            ->first();
     }
 
 
     /**
-     * Set the node resolution.
+     * Return the list of all.
      *
-     * @param string $node
-     * @param string $format
-     * @return $this
+     * @param bool $asArray
+     * @return Collection
      * @throws ISONodeAttributeMissing
      */
-    public function setResolution(string $node, string $format = self::NODE_AS_CODE)
+    public function all(bool $asArray = false): Collection
     {
-        if (!isset($this->nodeResolution[$node])) {
-            throw new ISONodeAttributeMissing('Node attribute is missing');
+        $countries = $this->iso->countries()->setOptions($this->options);
+
+        foreach ($this->nodeResolution as $nodeName => $nodeFormat) {
+            $countries->setResolution($nodeName, $nodeFormat);
         }
 
-        if ($this->nodeResolution[$node] !== $format) {
-            $this->nodeResolution[$node] = $format;
-            $this->cache = [];
-        }
+        $list = $this->list();
 
-        return $this;
+        return $countries->all()
+            ->groupBy($this->database)
+            ->map(function ($cur, $code) use ($list, $asArray) {
+                $base = [
+                    'code'       => $code,
+                    'name'       => $list[$code] ?? null,
+                    'countries'  => $asArray ? $cur->map(fn($c) => $c->toArray())->toArray() : $cur,
+                ];
+
+                foreach ($this->assocNodes as $assocNode) {
+                    $base[$assocNode] = $cur
+                        ->pluck($assocNode)
+                        ->filter()
+                        ->collapse()
+                        ->unique();
+
+                    if ($asArray)
+                        $base[$assocNode] = $base[$assocNode]->toArray();
+                }
+
+                return $asArray ? $base : new ModelRecord($base);
+            });
     }
 
+
+    public function toArray() : array {
+        return $this
+            ->all(true)
+            ->toArray();
+    }
+
+
     /**
-     * Get options.
+     * Return the raw list.
      *
-     * @return array|false[]
+     * @return Collection
      */
-    public function getOptions(): array
+    public function list(): Collection
     {
-        return $this->options;
-    }
-
-
-    /**
-     * Set options.
-     *
-     * @param array $options
-     * @return $this
-     */
-    public function setOptions(array $options): static
-    {
-        $this->options = $options;
-
-        return $this;
-    }
-
-
-    /**
-     * Resolve node data.
-     *
-     * @param string $node
-     * @param Collection $modelData
-     * @param array $codes
-     * @return array
-     */
-    protected function resolveNodeData(
-        string $node,
-        Collection $modelData,
-        array $codes,
-    ): ?array {
-        if ($this->nodeResolution[$node] === self::NODE_AS_NONE) {
-            return null;
-        }
-
-        $list = [];
-
-        foreach ($codes as $code) {
-            if ($this->nodeResolution[$node] === self::NODE_AS_CODE) {
-                $list[] = $code;
-            } elseif ($this->nodeResolution[$node] === self::NODE_AS_NAME) {
-                $list[] = $modelData[$code] ?? null;
-            } else {
-                $list[$code] = $modelData[$code] ?? null;
-            }
-        }
-
-        return $list;
-    }
-
-
-    /**
-     * Set into cache.
-     *
-     * @param string $key
-     * @param $values
-     */
-    protected function setCache(string $key, $values)
-    {
-        $this->cache[$this->getCacheKey() . '_' . $key] = $values;
-    }
-
-
-    /**
-     * Get data from cache.
-     *
-     * @param string $key
-     * @return Collection|null
-     */
-    protected function getCache(string $key)
-    {
-        return $this->cache[$this->getCacheKey() . '_' . $key] ?? null;
-    }
-
-
-    /**
-     * Obtain the cache key.
-     *
-     * @return string
-     */
-    protected function getCacheKey(): string
-    {
-        return md5(serialize($this->options));
+        return collect($this->iso->getDatabaseInstance($this->database)->all());
     }
 }

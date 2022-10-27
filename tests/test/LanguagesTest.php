@@ -10,7 +10,7 @@ class LanguagesTest extends TestCase
 
     public function testAllLanguages() {
         $iso = new ISOCodes();
-        $cont = $iso->byLanguage()->all();
+        $cont = $iso->languages()->all();
 
         $this->assertGreaterThan(40, $cont->count());
     }
@@ -19,7 +19,7 @@ class LanguagesTest extends TestCase
     public function testByLanguageCode() {
         $iso = new ISOCodes();
 
-        $cont = $iso->byLanguage()->byCode('ES');
+        $cont = $iso->languages()->findByCode('ES');
 
         $this->assertArrayHasKey('countries', $cont);
         $this->assertArrayHasKey('currencies', $cont);

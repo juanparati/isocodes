@@ -1,13 +1,13 @@
 <?php
 
-namespace Juanparati\ISOCodes\Databases;
+namespace Juanparati\ISOCodes\Data;
 
-use Juanparati\ISOCodes\Contracts\ISODatabase;
+use Juanparati\ISOCodes\Contracts\ISODataContract;
 
 /**
  * Base class used for databases.
  */
-abstract class ISODatabaseBase implements ISODatabase
+abstract class ISODataBase implements ISODataContract
 {
     /**
      * Database data.

@@ -1,15 +1,15 @@
 <?php
 
-namespace Juanparati\ISOCodes\Databases\Currencies;
+namespace Juanparati\ISOCodes\Data\Currencies;
 
-use Juanparati\ISOCodes\Databases\ISODatabaseBase;
+use Juanparati\ISOCodes\Data\ISODataBase;
 
 /**
  * List of currencies (English)
  *
  * @see https://en.wikipedia.org/wiki/ISO_4217
  */
-class CurrenciesEN extends ISODatabaseBase
+class CurrenciesEN extends ISODataBase
 {
     protected array $db = [
         'AED' => 'UAE Dirham',

@@ -1,15 +1,15 @@
 <?php
 
-namespace Juanparati\ISOCodes\Databases\Currencies;
+namespace Juanparati\ISOCodes\Data\Currencies;
 
-use Juanparati\ISOCodes\Databases\ISODatabaseBase;
+use Juanparati\ISOCodes\Data\ISODataBase;
 
 /**
  * List of currency codes to currency number (ISO 4217)
  *
  * @see https://en.wikipedia.org/wiki/ISO_4217
  */
-class CurrencyNumbers extends ISODatabaseBase
+class CurrencyNumbers extends ISODataBase
 {
     protected array $db = [
         'AFN' => '971',

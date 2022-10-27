@@ -2,40 +2,41 @@
 
 namespace Juanparati\ISOCodes;
 
-use Juanparati\ISOCodes\Contracts\ISODatabase;
-use Juanparati\ISOCodes\Contracts\ISOModel;
+use Illuminate\Support\Pluralizer;
+use Juanparati\ISOCodes\Contracts\ISODataContract;
+use Juanparati\ISOCodes\Contracts\ISOModelContract;
 use Juanparati\ISOCodes\Exceptions\ISOModelNotFound;
 
 /**
  * Provide the main ISOCodes objects.
  *
- * @method \Juanparati\ISOCodes\Models\ByContinentModel byContinent
- * @method \Juanparati\ISOCodes\Models\ByCountryModel byCountry
- * @method \Juanparati\ISOCodes\Models\ByCurrencyModel byCurrency
- * @method \Juanparati\ISOCodes\Models\ByCurrencyNumberModel byCurrencyNumber
- * @method \Juanparati\ISOCodes\Models\ByLanguageModel byLanguage
+ * @method \Juanparati\ISOCodes\Models\ContinentModel continents
+ * @method \Juanparati\ISOCodes\Models\CountryModel countries
+ * @method \Juanparati\ISOCodes\Models\CurrencyModel currencies
+ * @method \Juanparati\ISOCodes\Models\CurrencyNumberModel currencyNumbers
+ * @method \Juanparati\ISOCodes\Models\LanguageModel languages
  */
 class ISOCodes
 {
     /**
-     * Registered databases.
+     * Registered data.
      *
-     * @var ISODatabase[]
+     * @var ISODataContract[]
      */
-    protected array $databases = [
-        'countryCodes'   => \Juanparati\ISOCodes\Databases\Countries\CountryCodes::class,
-        'countries'      => \Juanparati\ISOCodes\Databases\Countries\CountriesEN::class,
-        'currencies'     => \Juanparati\ISOCodes\Databases\Currencies\CurrenciesEN::class,
-        'currencyNumbers'=> \Juanparati\ISOCodes\Databases\Currencies\CurrencyNumbers::class,
-        'languages'      => \Juanparati\ISOCodes\Databases\Languages\LanguagesEN::class,
-        'continents'     => \Juanparati\ISOCodes\Databases\Continents\ContinentsEN::class,
+    protected array $datasets = [
+        'countryCodes'   => \Juanparati\ISOCodes\Data\Countries\CountryCodes::class,
+        'countries'      => \Juanparati\ISOCodes\Data\Countries\CountriesEN::class,
+        'currencies'     => \Juanparati\ISOCodes\Data\Currencies\CurrenciesEN::class,
+        'currencyNumbers'=> \Juanparati\ISOCodes\Data\Currencies\CurrencyNumbers::class,
+        'languages'      => \Juanparati\ISOCodes\Data\Languages\LanguagesEN::class,
+        'continents'     => \Juanparati\ISOCodes\Data\Continents\ContinentsEN::class,
     ];
 
 
     /**
      * Loaded models.
      *
-     * @var ISOModel[]
+     * @var ISOModelContract[]
      */
     protected array $modelInstances = [];
 
@@ -43,7 +44,7 @@ class ISOCodes
     /**
      * Loaded databases.
      *
-     * @var ISODatabase[]
+     * @var ISODataContract[]
      */
     protected array $databaseInstances = [];
 
@@ -51,11 +52,11 @@ class ISOCodes
     /**
      * Constructor.
      *
-     * @param array $databases
+     * @param array $datasets
      */
-    public function __construct(array $databases = [])
+    public function __construct(array $datasets = [])
     {
-        $this->databases = array_merge($this->databases, $databases);
+        $this->datasets = array_merge($this->datasets, $datasets);
     }
 
 
@@ -64,12 +65,12 @@ class ISOCodes
      *
      * @param string $name
      * @param array $args
-     * @return ISOModel
+     * @return ISOModelContract
      * @throws ISOModelNotFound
      */
     public function __call(string $name, array $args)
     {
-        $model = '\\Juanparati\\ISOCodes\\Models\\' . ucfirst($name) . 'Model';
+        $model = '\\Juanparati\\ISOCodes\\Models\\' . ucfirst(Pluralizer::singular($name)) . 'Model';
 
         if (!isset($this->modelInstances[$model])) {
             if (class_exists($model)) {
@@ -87,12 +88,12 @@ class ISOCodes
      * Return the list of loaded databases.
      *
      * @param string
-     * @return ISODatabase
+     * @return ISODataContract
      */
-    public function getDatabaseInstance(string $key): ISODatabase
+    public function getDatabaseInstance(string $key): ISODataContract
     {
         if (!isset($this->databaseInstances[$key])) {
-            $this->databaseInstances[$key] = new $this->databases[$key]();
+            $this->databaseInstances[$key] = new $this->datasets[$key]();
         }
 
         return $this->databaseInstances[$key];

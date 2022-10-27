@@ -2,12 +2,12 @@
 
 namespace Juanparati\ISOCodes\Models;
 
-class ByContinentModel extends ByNodeBase
+class CurrencyModel extends ModelBase
 {
-    protected string $database = 'continents';
+    protected string $database = 'currencies';
 
     protected array $assocNodes = [
-        'currencies',
         'languages',
+        'continents',
     ];
 }

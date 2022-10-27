@@ -2,16 +2,17 @@
 
 namespace Juanparati\ISOCodes\Models;
 
-use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use Juanparati\ISOCodes\Contracts\ISOModelContract;
+use Juanparati\ISOCodes\Models\Extensions\CollectionMethodCallable;
 use Juanparati\ISOCodes\Models\Extensions\NodeSearchable;
 
 
-class ByCountryModel extends ModelBase
+class CountryModel extends BasicModelBase implements ISOModelContract
 {
 
-    use NodeSearchable;
+    use NodeSearchable, CollectionMethodCallable;
 
     /**
      * Search by Alpha2.
@@ -19,7 +20,7 @@ class ByCountryModel extends ModelBase
      * @param string $alpha2
      * @return array|null
      */
-    public function byAlpha2(string $alpha2): ?array
+    public function findByAlpha2(string $alpha2): ?ModelRecord
     {
         return $this->all()
             ->firstWhere('alpha2', strtoupper($alpha2));
@@ -32,7 +33,7 @@ class ByCountryModel extends ModelBase
      * @param string $alpha3
      * @return array|null
      */
-    public function byAlpha3(string $alpha3): ?array
+    public function findByAlpha3(string $alpha3): ?ModelRecord
     {
         return $this->all()
             ->firstWhere('alpha3', strtoupper($alpha3));
@@ -45,7 +46,7 @@ class ByCountryModel extends ModelBase
      * @param $number
      * @return array|null
      */
-    public function byNumeric($number): ?array
+    public function findByNumeric($number): ?ModelRecord
     {
         return $this->all()
             ->firstWhere('numeric', $number);
@@ -58,7 +59,7 @@ class ByCountryModel extends ModelBase
      * @param string $tld
      * @return array|null
      */
-    public function byTld(string $tld): ?array
+    public function findByTld(string $tld): ?ModelRecord
     {
         $tld = Str::of($tld)
             ->start('.')
@@ -70,12 +71,30 @@ class ByCountryModel extends ModelBase
 
 
     /**
+     * Search by name (Case insensitive).
+     *
+     * @param string $name
+     * @return array|null
+     */
+    public function findByName(string $name): ?ModelRecord
+    {
+        $name = (string) Str::of($name)
+            ->lower()
+            ->trim();
+
+        return $this->all()
+            ->filter(fn($country) => $name === Str::lower($country['name']))
+            ->first();
+    }
+
+
+    /**
      * Search by phone code.
      *
      * @param $code
      * @return array|null
      */
-    public function byPhoneCode($code) : ?array
+    public function findByPhoneCode($code) : ?ModelRecord
     {
         $code = is_string($code) ? ('+' === $code[0] ? substr($code, 1) : $code) : $code;
 
@@ -90,7 +109,7 @@ class ByCountryModel extends ModelBase
      * @param bool $exact
      * @return Collection|null
      */
-    public function byLanguage(string|array $language, bool $exact = false) : ?Collection
+    public function whereLanguage(string|array $language, bool $exact = false) : ?Collection
     {
         return $this->whereNodeHas('languages', $language, $exact);
     }
@@ -103,7 +122,7 @@ class ByCountryModel extends ModelBase
      * @param bool $exact
      * @return Collection|null
      */
-    public function byCurrency(string|array $currency, bool $exact = false) : ?Collection
+    public function whereCurrency(string|array $currency, bool $exact = false) : ?Collection
     {
         return $this->whereNodeHas('currencies', $currency, $exact);
     }
@@ -116,50 +135,29 @@ class ByCountryModel extends ModelBase
      * @param bool $exact
      * @return Collection|null
      */
-    public function byContinent(string|array $continent, bool $exact = false) : ?Collection
+    public function whereContinent(string|array $continent, bool $exact = false) : ?Collection
     {
         return $this->whereNodeHas('continents', $continent, $exact);
     }
 
 
     /**
-     * Search by name (Case insensitive).
-     *
-     * @param string $name
-     * @return array|null
-     */
-    public function byName(string $name ): ?array
-    {
-        $name = (string) Str::of($name)
-            ->lower()
-            ->trim();
-
-        return $this->all()
-            ->filter(fn($country) => $name === Str::lower($country['name']))
-            ->first();
-    }
-
-
-    /**
      * Return the list of all country codes with their nodes.
      *
+     * @param bool $asArray
      * @return Collection
      */
-    public function all(): Collection
+    public function all(bool $asArray = false): Collection
     {
-        if ($collection = $this->getCache('all')) {
-            return $collection;
-        }
-
         $nodeData = [
-            'languages'  => $this->iso->byLanguage()->list(),
-            'continents' => $this->iso->byContinent()->list(),
-            'currencies' => $this->iso->byCurrency()->list()
+            'languages'  => $this->iso->languages()->list(),
+            'continents' => $this->iso->continents()->list(),
+            'currencies' => $this->iso->currencies()->list()
         ];
 
-        $currencyNumbers = $this->iso->byCurrencyNumber()->list();
+        $currencyNumbers = $this->iso->currencyNumbers()->list();
 
-        $list = $this->list()->map(function ($country) use ($nodeData, $currencyNumbers) {
+        return $this->list()->map(function ($country) use ($nodeData, $currencyNumbers, $asArray) {
             foreach (array_keys($this->nodeResolution) as $nodeName) {
                 if (isset($country[$nodeName])) {
                     $data = $this->resolveNodeData(
@@ -183,12 +181,8 @@ class ByCountryModel extends ModelBase
                 }
             }
 
-            return $country;
+            return $asArray ? $country : new ModelRecord($country);
         });
-
-        $this->setCache('all', $list);
-
-        return $list;
     }
 
 
@@ -199,20 +193,19 @@ class ByCountryModel extends ModelBase
      */
     public function list(): Collection
     {
-        if ($collection = $this->getCache('list')) {
-            return $collection;
-        }
-
         $countryNames = $this->iso->getDatabaseInstance('countries')->all();
 
-        $list = collect($this->iso->getDatabaseInstance('countryCodes')->all())
+        return collect($this->iso->getDatabaseInstance('countryCodes')->all())
             ->map(function ($country, $code) use ($countryNames) {
                 $country['name'] = $countryNames[$code];
                 return $country;
             });
+    }
 
-        $this->setCache('list', $list);
 
-        return $list;
+    public function toArray() : array {
+        return $this
+            ->all(true)
+            ->toArray();
     }
 }

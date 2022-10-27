@@ -10,14 +10,14 @@ class ContinentsTest extends TestCase
 
     public function testAllContinents() {
         $iso = new ISOCodes();
-        $cont = $iso->byContinent()->all();
+        $cont = $iso->continents()->all();
         $this->assertEquals(7, $cont->count());
     }
 
 
-    public function testByContinentCode() {
+    public function testContinentCode() {
         $iso = new ISOCodes();
-        $cont = $iso->byContinent()->byCode('EU');
+        $cont = $iso->continents()->findByCode('EU');
 
         $this->assertArrayHasKey('countries', $cont);
         $this->assertArrayHasKey('languages', $cont);

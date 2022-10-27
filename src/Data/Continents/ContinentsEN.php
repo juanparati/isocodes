@@ -1,15 +1,15 @@
 <?php
 
-namespace Juanparati\ISOCodes\Databases\Continents;
+namespace Juanparati\ISOCodes\Data\Continents;
 
-use Juanparati\ISOCodes\Databases\ISODatabaseBase;
+use Juanparati\ISOCodes\Data\ISODataBase;
 
 /**
  * List of continents (English).
  *
  * @see https://datahub.io/core/continent-codes
  */
-class ContinentsEN extends ISODatabaseBase
+class ContinentsEN extends ISODataBase
 {
     protected array $db = [
         'AF' => 'Africa',

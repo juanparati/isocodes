@@ -1,8 +1,8 @@
 <?php
 
-namespace Juanparati\ISOCodes\Databases\Countries;
+namespace Juanparati\ISOCodes\Data\Countries;
 
-use Juanparati\ISOCodes\Databases\ISODatabaseBase;
+use Juanparati\ISOCodes\Data\ISODataBase;
 
 /**
  * List of country codes with their ISO 3166-1 alpha-2, alpha3, numeric code, TLD and phone code.
@@ -12,8 +12,9 @@ use Juanparati\ISOCodes\Databases\ISODatabaseBase;
  * @see https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3
  * @see https://en.wikipedia.org/wiki/Country_code_top-level_domain
  * @see https://en.wikipedia.org/wiki/List_of_country_calling_codes
+ * @see https://european-union.europa.eu/principles-countries-history/country-profiles_en
  */
-class CountryCodes extends ISODatabaseBase
+class CountryCodes extends ISODataBase
 {
     protected array $db = [
         'AF' => [
@@ -27,6 +28,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Kabul',
             'flag'       => '🇦🇫',
             'phone_code' => '93',
+            'eu_member'  => false,
         ],
         'AX' => [
             'alpha2'     => 'AX',
@@ -39,6 +41,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Mariehamn',
             'flag'       => '🇦🇽',
             'phone_code' => '358',
+            'eu_member'  => false,
         ],
         'AL' => [
             'alpha2'     => 'AL',
@@ -51,6 +54,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Tirana',
             'flag'       => '🇦🇱',
             'phone_code' => '355',
+            'eu_member'  => false,
         ],
         'DZ' => [
             'alpha2'     => 'DZ',
@@ -63,6 +67,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Algiers',
             'flag'       => '🇩🇿',
             'phone_code' => '213',
+            'eu_member'  => false,
         ],
         'AS' => [
             'alpha2'     => 'AS',
@@ -75,6 +80,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Pago Pago',
             'flag'       => '🇦🇸',
             'phone_code' => '1684',
+            'eu_member'  => false,
         ],
         'AD' => [
             'alpha2'     => 'AD',
@@ -87,6 +93,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Andorra la Vella',
             'flag'       => '🇦🇩',
             'phone_code' => '376',
+            'eu_member'  => false,
         ],
         'AO' => [
             'alpha2'     => 'AO',
@@ -99,6 +106,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Luanda',
             'flag'       => '🇦🇴',
             'phone_code' => '244',
+            'eu_member'  => false,
         ],
         'AI' => [
             'alpha2'     => 'AI',
@@ -111,6 +119,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'The Valley',
             'flag'       => '🇦🇮',
             'phone_code' => '1-264',
+            'eu_member'  => false,
         ],
         'AG' => [
             'alpha2'     => 'AG',
@@ -123,6 +132,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Saint John\'s',
             'flag'       => '🇦🇬',
             'phone_code' => '1268',
+            'eu_member'  => false,
         ],
         'AR' => [
             'alpha2'     => 'AR',
@@ -135,6 +145,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Buenos Aires',
             'flag'       => '🇦🇷',
             'phone_code' => '54',
+            'eu_member'  => false,
         ],
         'AM' => [
             'alpha2'     => 'AM',
@@ -147,6 +158,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Yerevan',
             'flag'       => '🇦🇲',
             'phone_code' => '374',
+            'eu_member'  => false,
         ],
         'AW' => [
             'alpha2'     => 'AW',
@@ -159,6 +171,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Oranjestad',
             'flag'       => '🇦🇼',
             'phone_code' => '297',
+            'eu_member'  => false,
         ],
         'AU' => [
             'alpha2'     => 'AU',
@@ -171,6 +184,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Canberra',
             'flag'       => '🇦🇺',
             'phone_code' => '61',
+            'eu_member'  => false,
         ],
         'AT' => [
             'alpha2'     => 'AT',
@@ -183,6 +197,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Vienna',
             'flag'       => '🇦🇹',
             'phone_code' => '43',
+            'eu_member'  => true,
         ],
         'AZ' => [
             'alpha2'     => 'AZ',
@@ -195,6 +210,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Baku',
             'flag'       => '🇦🇿',
             'phone_code' => '994',
+            'eu_member'  => false,
         ],
         'BS' => [
             'alpha2'     => 'BS',
@@ -207,6 +223,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Nassau',
             'flag'       => '🇧🇸',
             'phone_code' => '1242',
+            'eu_member'  => false,
         ],
         'BH' => [
             'alpha2'     => 'BH',
@@ -219,6 +236,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Manama',
             'flag'       => '🇧🇭',
             'phone_code' => '973',
+            'eu_member'  => false,
         ],
         'BD' => [
             'alpha2'     => 'BD',
@@ -231,6 +249,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Dhaka',
             'flag'       => '🇧🇩',
             'phone_code' => '880',
+            'eu_member'  => false,
         ],
         'BB' => [
             'alpha2'     => 'BB',
@@ -243,6 +262,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Bridgetown',
             'flag'       => '🇧🇧',
             'phone_code' => '1246',
+            'eu_member'  => false,
         ],
         'BY' => [
             'alpha2'     => 'BY',
@@ -255,6 +275,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Minsk',
             'flag'       => '🇱🇾',
             'phone_code' => '218',
+            'eu_member'  => false,
         ],
         'BE' => [
             'alpha2'     => 'BE',
@@ -267,6 +288,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Brussels',
             'flag'       => '🇧🇪',
             'phone_code' => '32',
+            'eu_member'  => true,
         ],
         'BZ' => [
             'alpha2'     => 'BZ',
@@ -279,6 +301,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Belmopan',
             'flag'       => '🇧🇿',
             'phone_code' => '501',
+            'eu_member'  => false,
         ],
         'BJ' => [
             'alpha2'     => 'BJ',
@@ -291,6 +314,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Porto-Novo',
             'flag'       => '🇧🇯',
             'phone_code' => '229',
+            'eu_member'  => false,
         ],
         'BM' => [
             'alpha2'     => 'BM',
@@ -303,6 +327,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Hamilton',
             'flag'       => '🇧🇲',
             'phone_code' => '1441',
+            'eu_member'  => false,
         ],
         'BT' => [
             'alpha2'     => 'BT',
@@ -315,6 +340,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Thimphu',
             'flag'       => '🇧🇹',
             'phone_code' => '975',
+            'eu_member'  => false,
         ],
         'BO' => [
             'alpha2'     => 'BO',
@@ -327,6 +353,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Sucre',
             'flag'       => '🇧🇴',
             'phone_code' => '591',
+            'eu_member'  => false,
         ],
         'BQ' => [
             'alpha2'     => 'BQ',
@@ -336,9 +363,10 @@ class CountryCodes extends ISODatabaseBase
             'currencies' => ['USD',],
             'languages'  => ['NL'],
             'continents' => ['SA'],
-            'capital'    => null,
+            'capital'    => 'Kralendijk',
             'flag'       => '🇧🇶',
-            'phone_code' => null,
+            'phone_code' => '599-7',
+            'eu_member'  => false,
         ],
         'BA' => [
             'alpha2'     => 'BA',
@@ -351,6 +379,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Sarajevo',
             'flag'       => '🇧🇦',
             'phone_code' => '387',
+            'eu_member'  => false,
         ],
         'BW' => [
             'alpha2'     => 'BW',
@@ -363,6 +392,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Gaborone',
             'flag'       => '🇧🇼',
             'phone_code' => '267',
+            'eu_member'  => false,
         ],
         'BV' => [
             'alpha2'     => 'BV',
@@ -375,6 +405,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => null,
             'flag'       => '🇧🇻',
             'phone_code' => NULL,
+            'eu_member'  => false,
         ],
         'BR' => [
             'alpha2'     => 'BR',
@@ -387,6 +418,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Brasília',
             'flag'       => '🇧🇷',
             'phone_code' => '55',
+            'eu_member'  => false,
         ],
         'IO' => [
             'alpha2'     => 'IO',
@@ -399,6 +431,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Diego Garcia',
             'flag'       => '🇮🇴',
             'phone_code' => '246',
+            'eu_member'  => false,
         ],
         'BN' => [
             'alpha2'     => 'BN',
@@ -411,6 +444,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Bandar Seri Begawan',
             'flag'       => '🇧🇳',
             'phone_code' => '673',
+            'eu_member'  => false,
         ],
         'BG' => [
             'alpha2'     => 'BG',
@@ -423,6 +457,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Sofia',
             'flag'       => '🇧🇬',
             'phone_code' => '359',
+            'eu_member'  => true,
         ],
         'BF' => [
             'alpha2'     => 'BF',
@@ -435,6 +470,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Ouagadougou',
             'flag'       => '🇧🇫',
             'phone_code' => '226',
+            'eu_member'  => false,
         ],
         'BI' => [
             'alpha2'     => 'BI',
@@ -447,6 +483,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Bujumbura',
             'flag'       => '🇧🇮',
             'phone_code' => '257',
+            'eu_member'  => false,
         ],
         'CV' => [
             'alpha2'     => 'CV',
@@ -459,6 +496,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Praia',
             'flag'       => '🇨🇻',
             'phone_code' => '238',
+            'eu_member'  => false,
         ],
         'KH' => [
             'alpha2'     => 'KH',
@@ -471,6 +509,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Phnom Penh',
             'flag'       => '🇰🇭',
             'phone_code' => '855',
+            'eu_member'  => false,
         ],
         'CM' => [
             'alpha2'     => 'CM',
@@ -483,6 +522,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Yaoundé',
             'flag'       => '🇨🇲',
             'phone_code' => '237',
+            'eu_member'  => false,
         ],
         'CA' => [
             'alpha2'     => 'CA',
@@ -495,6 +535,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Ottawa',
             'flag'       => '🇨🇦',
             'phone_code' => '1',
+            'eu_member'  => false,
         ],
         'KY' => [
             'alpha2'     => 'KY',
@@ -507,6 +548,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'George Town',
             'flag'       => '🇰🇾',
             'phone_code' => '1345',
+            'eu_member'  => false,
         ],
         'CF' => [
             'alpha2'     => 'CF',
@@ -519,6 +561,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Bangui',
             'flag'       => '🇨🇫',
             'phone_code' => '236',
+            'eu_member'  => false,
         ],
         'TD' => [
             'alpha2'     => 'TD',
@@ -531,6 +574,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'N\'Djamena',
             'flag'       => '🇹🇩',
             'phone_code' => '235',
+            'eu_member'  => false,
         ],
         'CL' => [
             'alpha2'     => 'CL',
@@ -543,6 +587,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Santiago',
             'flag'       => '🇨🇱',
             'phone_code' => '56',
+            'eu_member'  => false,
         ],
         'CN' => [
             'alpha2'     => 'CN',
@@ -555,6 +600,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Beijing',
             'flag'       => '🇨🇳',
             'phone_code' => '86',
+            'eu_member'  => false,
         ],
         'CX' => [
             'alpha2'     => 'CX',
@@ -567,6 +613,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Flying Fish Cove',
             'flag'       => '🇨🇽',
             'phone_code' => '61',
+            'eu_member'  => false,
         ],
         'CC' => [
             'alpha2'     => 'CC',
@@ -579,6 +626,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'West Island',
             'flag'       => '🇨🇨',
             'phone_code' => '61',
+            'eu_member'  => false,
         ],
         'CO' => [
             'alpha2'     => 'CO',
@@ -591,6 +639,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Bogotá',
             'flag'       => '🇨🇴',
             'phone_code' => '57',
+            'eu_member'  => false,
         ],
         'KM' => [
             'alpha2'     => 'KM',
@@ -603,6 +652,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Moroni',
             'flag'       => '🇰🇲',
             'phone_code' => '269',
+            'eu_member'  => false,
         ],
         'CG' => [
             'alpha2'     => 'CG',
@@ -615,6 +665,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Brazzaville',
             'flag'       => '🇨🇬',
             'phone_code' => '242',
+            'eu_member'  => false,
         ],
         'CD' => [
             'alpha2'     => 'CD',
@@ -627,6 +678,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Kinshasa',
             'flag'       => '🇨🇩',
             'phone_code' => '243',
+            'eu_member'  => false,
         ],
         'CK' => [
             'alpha2'     => 'CK',
@@ -639,6 +691,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Avarua',
             'flag'       => '🇨🇰',
             'phone_code' => '682',
+            'eu_member'  => false,
         ],
         'CR' => [
             'alpha2'     => 'CR',
@@ -651,6 +704,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'San José',
             'flag'       => '🇨🇷',
             'phone_code' => '506',
+            'eu_member'  => false,
         ],
         'CI' => [
             'alpha2'     => 'CI',
@@ -663,6 +717,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Yamoussoukro',
             'flag'       => '🇨🇮',
             'phone_code' => '225',
+            'eu_member'  => false,
         ],
         'HR' => [
             'alpha2'     => 'HR',
@@ -675,6 +730,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Zagreb',
             'flag'       => '🇭🇷',
             'phone_code' => '385',
+            'eu_member'  => true,
         ],
         'CU' => [
             'alpha2'     => 'CU',
@@ -687,6 +743,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Havana',
             'flag'       => '🇨🇺',
             'phone_code' => '53',
+            'eu_member'  => false,
         ],
         'CW' => [
             'alpha2'     => 'CW',
@@ -699,6 +756,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Willemstad',
             'flag'       => '🇨🇼',
             'phone_code' => '5999',
+            'eu_member'  => false,
         ],
         'CY' => [
             'alpha2'     => 'CY',
@@ -707,10 +765,11 @@ class CountryCodes extends ISODatabaseBase
             'tld'        => '.cy',
             'currencies' => ['EUR',],
             'languages'  => ['EL', 'TR'],
-            'continents' => ['AS', 'EU'],
+            'continents' => ['AS'],
             'capital'    => 'Nicosia',
             'flag'       => '🇨🇾',
             'phone_code' => '357',
+            'eu_member'  => true,
         ],
         'CZ' => [
             'alpha2'     => 'CZ',
@@ -723,6 +782,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Prague',
             'flag'       => '🇨🇿',
             'phone_code' => '420',
+            'eu_member'  => true,
         ],
         'DK' => [
             'alpha2'     => 'DK',
@@ -735,6 +795,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Copenhagen',
             'flag'       => '🇩🇰',
             'phone_code' => '45',
+            'eu_member'  => true,
         ],
         'DJ' => [
             'alpha2'     => 'DJ',
@@ -747,6 +808,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Djibouti',
             'flag'       => '🇩🇯',
             'phone_code' => '253',
+            'eu_member'  => false,
         ],
         'DM' => [
             'alpha2'     => 'DM',
@@ -759,6 +821,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Roseau',
             'flag'       => '🇩🇲',
             'phone_code' => '1767',
+            'eu_member'  => false,
         ],
         'DO' => [
             'alpha2'     => 'DO',
@@ -771,6 +834,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Santo Domingo',
             'flag'       => '🇩🇴',
             'phone_code' => '1809',
+            'eu_member'  => false,
         ],
         'EC' => [
             'alpha2'     => 'EC',
@@ -783,6 +847,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Quito',
             'flag'       => '🇪🇨',
             'phone_code' => '593',
+            'eu_member'  => false,
         ],
         'EG' => [
             'alpha2'     => 'EG',
@@ -795,6 +860,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Cairo',
             'flag'       => '🇪🇬',
             'phone_code' => '20',
+            'eu_member'  => false,
         ],
         'SV' => [
             'alpha2'     => 'SV',
@@ -807,6 +873,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'San Salvador',
             'flag'       => '🇸🇻',
             'phone_code' => '503',
+            'eu_member'  => false,
         ],
         'GQ' => [
             'alpha2'     => 'GQ',
@@ -819,6 +886,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Malabo',
             'flag'       => '🇬🇶',
             'phone_code' => '240',
+            'eu_member'  => false,
         ],
         'ER' => [
             'alpha2'     => 'ER',
@@ -831,6 +899,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Asmara',
             'flag'       => '🇪🇷',
             'phone_code' => '291',
+            'eu_member'  => false,
         ],
         'EE' => [
             'alpha2'     => 'EE',
@@ -843,6 +912,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Tallinn',
             'flag'       => '🇪🇪',
             'phone_code' => '372',
+            'eu_member'  => true,
         ],
         'ET' => [
             'alpha2'     => 'ET',
@@ -855,6 +925,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Addis Ababa',
             'flag'       => '🇪🇹',
             'phone_code' => '251',
+            'eu_member'  => false,
         ],
         'SZ' => [
             'alpha2'     => 'SZ',
@@ -867,6 +938,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Lobamba',
             'flag'       => '🇸🇿',
             'phone_code' => '268',
+            'eu_member'  => false,
         ],
         'FK' => [
             'alpha2'     => 'FK',
@@ -879,6 +951,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Stanley',
             'flag'       => '🇫🇰',
             'phone_code' => '500',
+            'eu_member'  => false,
         ],
         'FO' => [
             'alpha2'     => 'FO',
@@ -891,6 +964,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Tórshavn',
             'flag'       => '🇫🇴',
             'phone_code' => '298',
+            'eu_member'  => false,
         ],
         'FJ' => [
             'alpha2'     => 'FJ',
@@ -903,6 +977,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Suva',
             'flag'       => '🇫🇯',
             'phone_code' => '679',
+            'eu_member'  => false,
         ],
         'FI' => [
             'alpha2'     => 'FI',
@@ -915,6 +990,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Helsinki',
             'flag'       => '🇫🇮',
             'phone_code' => '358',
+            'eu_member'  => true,
         ],
         'FR' => [
             'alpha2'     => 'FR',
@@ -927,6 +1003,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Paris',
             'flag'       => '🇫🇷',
             'phone_code' => '33',
+            'eu_member'  => true,
         ],
         'GF' => [
             'alpha2'     => 'GF',
@@ -939,6 +1016,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Cayenne',
             'flag'       => '🇬🇫',
             'phone_code' => '594',
+            'eu_member'  => false,
         ],
         'PF' => [
             'alpha2'     => 'PF',
@@ -951,6 +1029,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Papeetē',
             'flag'       => '🇵🇫',
             'phone_code' => '689',
+            'eu_member'  => false,
         ],
         'TF' => [
             'alpha2'     => 'TF',
@@ -963,6 +1042,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Port-aux-Français',
             'flag'       => '🇹🇫',
             'phone_code' => null,
+            'eu_member'  => false,
         ],
         'GA' => [
             'alpha2'     => 'GA',
@@ -975,6 +1055,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Libreville',
             'flag'       => '🇬🇦',
             'phone_code' => '241',
+            'eu_member'  => false,
         ],
         'GM' => [
             'alpha2'     => 'GM',
@@ -987,6 +1068,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Banjul',
             'flag'       => '🇬🇲',
             'phone_code' => '220',
+            'eu_member'  => false,
 
         ],
         'GE' => [
@@ -1000,6 +1082,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Tbilisi',
             'flag'       => '🇬🇪',
             'phone_code' => '995',
+            'eu_member'  => false,
         ],
         'DE' => [
             'alpha2'     => 'DE',
@@ -1012,6 +1095,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Berlin',
             'flag'       => '🇩🇪',
             'phone_code' => '49',
+            'eu_member'  => true,
         ],
         'GH' => [
             'alpha2'     => 'GH',
@@ -1024,6 +1108,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Accra',
             'flag'       => '🇬🇭',
             'phone_code' => '233',
+            'eu_member'  => false,
         ],
         'GI' => [
             'alpha2'     => 'GI',
@@ -1036,6 +1121,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Gibraltar',
             'flag'       => '🇬🇮',
             'phone_code' => '350',
+            'eu_member'  => false,
         ],
         'GR' => [
             'alpha2'     => 'GR',
@@ -1048,6 +1134,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Athens',
             'flag'       => '🇬🇷',
             'phone_code' => '30',
+            'eu_member'  => true,
         ],
         'GL' => [
             'alpha2'     => 'GL',
@@ -1060,6 +1147,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Nuuk',
             'flag'       => '🇬🇱',
             'phone_code' => '299',
+            'eu_member'  => false,
         ],
         'GD' => [
             'alpha2'     => 'GD',
@@ -1072,6 +1160,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'St. George\'s',
             'flag'       => '🇬🇩',
             'phone_code' => '1473',
+            'eu_member'  => false,
         ],
         'GP' => [
             'alpha2'     => 'GP',
@@ -1084,6 +1173,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Basse-Terre',
             'flag'       => '🇬🇵',
             'phone_code' => '590',
+            'eu_member'  => false,
         ],
         'GU' => [
             'alpha2'     => 'GU',
@@ -1096,6 +1186,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Hagåtña',
             'flag'       => '🇬🇺',
             'phone_code' => '1671',
+            'eu_member'  => false,
         ],
         'GT' => [
             'alpha2'     => 'GT',
@@ -1108,6 +1199,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Guatemala City',
             'flag'       => '🇬🇹',
             'phone_code' => '502',
+            'eu_member'  => false,
         ],
         'GG' => [
             'alpha2'     => 'GG',
@@ -1120,6 +1212,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'St. Peter Port',
             'flag'       => '🇬🇬',
             'phone_code' => '44',
+            'eu_member'  => false,
         ],
         'GN' => [
             'alpha2'     => 'GN',
@@ -1132,6 +1225,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Conakry',
             'flag'       => '🇬🇳',
             'phone_code' => '224',
+            'eu_member'  => false,
         ],
         'GW' => [
             'alpha2'     => 'GW',
@@ -1144,6 +1238,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Bissau',
             'flag'       => '🇬🇼',
             'phone_code' => '245',
+            'eu_member'  => false,
         ],
         'GY' => [
             'alpha2'     => 'GY',
@@ -1156,6 +1251,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Georgetown',
             'flag'       => '🇬🇾',
             'phone_code' => '592',
+            'eu_member'  => false,
         ],
         'HT' => [
             'alpha2'     => 'HT',
@@ -1168,6 +1264,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Port-au-Prince',
             'flag'       => '🇭🇹',
             'phone_code' => '509',
+            'eu_member'  => false,
         ],
         'HM' => [
             'alpha2'     => 'HM',
@@ -1180,6 +1277,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => null,
             'flag'       => '🇭🇲',
             'phone_code' => null,
+            'eu_member'  => false,
         ],
         'VA' => [
             'alpha2'     => 'VA',
@@ -1192,6 +1290,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Vatican City',
             'flag'       => '🇻🇦',
             'phone_code' => '3906698',
+            'eu_member'  => false,
         ],
         'HN' => [
             'alpha2'     => 'HN',
@@ -1204,6 +1303,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Tegucigalpa',
             'flag'       => '🇭🇳',
             'phone_code' => '504',
+            'eu_member'  => false,
         ],
         'HK' => [
             'alpha2'     => 'HK',
@@ -1216,6 +1316,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'City of Victoria',
             'flag'       => '🇭🇰',
             'phone_code' => '852',
+            'eu_member'  => false,
         ],
         'HU' => [
             'alpha2'     => 'HU',
@@ -1228,6 +1329,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Budapest',
             'flag'       => '🇭🇺',
             'phone_code' => '36',
+            'eu_member'  => true,
         ],
         'IS' => [
             'alpha2'     => 'IS',
@@ -1240,6 +1342,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Reykjavik',
             'flag'       => '🇮🇸',
             'phone_code' => '354',
+            'eu_member'  => false,
         ],
         'IN' => [
             'alpha2'     => 'IN',
@@ -1252,6 +1355,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'New Delhi',
             'flag'       => '🇮🇳',
             'phone_code' => '91',
+            'eu_member'  => false,
         ],
         'ID' => [
             'alpha2'     => 'ID',
@@ -1264,6 +1368,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Naypyidaw',
             'flag'       => '🇲🇲',
             'phone_code' => '95',
+            'eu_member'  => false,
         ],
         'IR' => [
             'alpha2'     => 'IR',
@@ -1276,6 +1381,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Tehran',
             'flag'       => '🇮🇷',
             'phone_code' => '98',
+            'eu_member'  => false,
         ],
         'IQ' => [
             'alpha2'     => 'IQ',
@@ -1288,6 +1394,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Baghdad',
             'flag'       => '🇮🇶',
             'phone_code' => '964',
+            'eu_member'  => false,
         ],
         'IE' => [
             'alpha2'     => 'IE',
@@ -1300,6 +1407,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Dublin',
             'flag'       => '🇮🇪',
             'phone_code' => '353',
+            'eu_member'  => true,
         ],
         'IM' => [
             'alpha2'     => 'IM',
@@ -1312,6 +1420,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Douglas',
             'flag'       => '🇮🇲',
             'phone_code' => '44',
+            'eu_member'  => false,
         ],
         'IL' => [
             'alpha2'     => 'IL',
@@ -1324,6 +1433,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Ramallah',
             'flag'       => '🇵🇸',
             'phone_code' => '970',
+            'eu_member'  => false,
         ],
         'IT' => [
             'alpha2'     => 'IT',
@@ -1336,6 +1446,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Rome',
             'flag'       => '🇮🇹',
             'phone_code' => '39',
+            'eu_member'  => true,
         ],
         'JM' => [
             'alpha2'     => 'JM',
@@ -1348,6 +1459,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Kingston',
             'flag'       => '🇯🇲',
             'phone_code' => '1876',
+            'eu_member'  => false,
         ],
         'JP' => [
             'alpha2'     => 'JP',
@@ -1360,6 +1472,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Tokyo',
             'flag'       => '🇯🇵',
             'phone_code' => '81',
+            'eu_member'  => false,
         ],
         'JE' => [
             'alpha2'     => 'JE',
@@ -1372,6 +1485,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Saint Helier',
             'flag'       => '🇯🇪',
             'phone_code' => '44',
+            'eu_member'  => false,
         ],
         'JO' => [
             'alpha2'     => 'JO',
@@ -1384,6 +1498,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Amman',
             'flag'       => '🇯🇴',
             'phone_code' => '962',
+            'eu_member'  => false,
         ],
         'KZ' => [
             'alpha2'     => 'KZ',
@@ -1396,6 +1511,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Astana',
             'flag'       => '🇰🇿',
             'phone_code' => '76',
+            'eu_member'  => false,
         ],
         'KE' => [
             'alpha2'     => 'KE',
@@ -1408,6 +1524,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Nairobi',
             'flag'       => '🇰🇪',
             'phone_code' => '254',
+            'eu_member'  => false,
         ],
         'KI' => [
             'alpha2'     => 'KI',
@@ -1417,8 +1534,10 @@ class CountryCodes extends ISODatabaseBase
             'languages'  => ['EN'],
             'currencies' => ['AUD',],
             'continents' => ['OC'],
+            'capital'    => 'South Tarawa',
             'flag'       => '🇰🇮',
             'phone_code' => '686',
+            'eu_member'  => false,
         ],
         'KP' => [
             'alpha2'     => 'KP',
@@ -1431,6 +1550,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Pyongyang',
             'flag'       => '🇰🇵',
             'phone_code' => '850',
+            'eu_member'  => false,
         ],
         'KR' => [
             'alpha2'     => 'KR',
@@ -1443,6 +1563,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Seoul',
             'flag'       => '🇰🇷',
             'phone_code' => '82',
+            'eu_member'  => false,
         ],
         'KW' => [
             'alpha2'     => 'KW',
@@ -1455,6 +1576,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Kuwait City',
             'flag'       => '🇰🇼',
             'phone_code' => '965',
+            'eu_member'  => false,
         ],
         'KG' => [
             'alpha2'     => 'KG',
@@ -1467,6 +1589,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Bishkek',
             'flag'       => '🇰🇬',
             'phone_code' => '996',
+            'eu_member'  => false,
         ],
         'LA' => [
             'alpha2'     => 'LA',
@@ -1479,6 +1602,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Vientiane',
             'flag'       => '🇱🇦',
             'phone_code' => '856',
+            'eu_member'  => false,
         ],
         'LV' => [
             'alpha2'     => 'LV',
@@ -1491,6 +1615,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Riga',
             'flag'       => '🇱🇻',
             'phone_code' => '371',
+            'eu_member'  => true,
         ],
         'LB' => [
             'alpha2'     => 'LB',
@@ -1503,6 +1628,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Beirut',
             'flag'       => '🇱🇧',
             'phone_code' => '961',
+            'eu_member'  => false,
         ],
         'LS' => [
             'alpha2'     => 'LS',
@@ -1515,6 +1641,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Maseru',
             'flag'       => '🇱🇸',
             'phone_code' => '266',
+            'eu_member'  => false,
         ],
         'LR' => [
             'alpha2'     => 'LR',
@@ -1527,6 +1654,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Monrovia',
             'flag'       => '🇱🇷',
             'phone_code' => '231',
+            'eu_member'  => false,
         ],
         'LY' => [
             'alpha2'     => 'LY',
@@ -1539,6 +1667,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Tripoli',
             'flag'       => '🇱🇾',
             'phone_code' => '218',
+            'eu_member'  => false,
         ],
         'LI' => [
             'alpha2'     => 'LI',
@@ -1551,6 +1680,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Vaduz',
             'flag'       => '🇱🇮',
             'phone_code' => '423',
+            'eu_member'  => false,
         ],
         'LT' => [
             'alpha2'     => 'LT',
@@ -1563,6 +1693,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Vilnius',
             'flag'       => '🇱🇹',
             'phone_code' => '370',
+            'eu_member'  => true,
         ],
         'LU' => [
             'alpha2'     => 'LU',
@@ -1575,6 +1706,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Luxembourg',
             'flag'       => '🇱🇺',
             'phone_code' => '352',
+            'eu_member'  => true,
         ],
         'MO' => [
             'alpha2'     => 'MO',
@@ -1587,6 +1719,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => null,
             'flag'       => '🇲🇴',
             'phone_code' => '853',
+            'eu_member'  => false,
         ],
         'MK' => [
             'alpha2'     => 'MK',
@@ -1599,6 +1732,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Skopje',
             'flag'       => '🇲🇰',
             'phone_code' => '389',
+            'eu_member'  => false,
         ],
         'MG' => [
             'alpha2'     => 'MG',
@@ -1611,6 +1745,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Antananarivo',
             'flag'       => '🇲🇬',
             'phone_code' => '261',
+            'eu_member'  => false,
         ],
         'MW' => [
             'alpha2'     => 'MW',
@@ -1623,6 +1758,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Lilongwe',
             'flag'       => '🇲🇼',
             'phone_code' => '265',
+            'eu_member'  => false,
         ],
         'MY' => [
             'alpha2'     => 'MY',
@@ -1635,6 +1771,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Kuala Lumpur',
             'flag'       => '🇲🇾',
             'phone_code' => '60',
+            'eu_member'  => false,
         ],
         'MV' => [
             'alpha2'     => 'MV',
@@ -1647,6 +1784,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Malé',
             'flag'       => '🇲🇻',
             'phone_code' => '960',
+            'eu_member'  => false,
         ],
         'ML' => [
             'alpha2'     => 'ML',
@@ -1659,6 +1797,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Bamako',
             'flag'       => '🇲🇱',
             'phone_code' => '223',
+            'eu_member'  => false,
         ],
         'MT' => [
             'alpha2'     => 'MT',
@@ -1671,6 +1810,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Valletta',
             'flag'       => '🇲🇹',
             'phone_code' => '356',
+            'eu_member'  => true,
         ],
         'MH' => [
             'alpha2'     => 'MH',
@@ -1683,6 +1823,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Majuro',
             'flag'       => '🇲🇭',
             'phone_code' => '692',
+            'eu_member'  => false,
         ],
         'MQ' => [
             'alpha2'     => 'MQ',
@@ -1695,6 +1836,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Fort-de-France',
             'flag'       => '🇲🇶',
             'phone_code' => '596',
+            'eu_member'  => false,
         ],
         'MR' => [
             'alpha2'     => 'MR',
@@ -1707,6 +1849,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Nouakchott',
             'flag'       => '🇲🇷',
             'phone_code' => '222',
+            'eu_member'  => false,
         ],
         'MU' => [
             'alpha2'     => 'MU',
@@ -1719,6 +1862,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Port Louis',
             'flag'       => '🇲🇺',
             'phone_code' => '230',
+            'eu_member'  => false,
         ],
         'YT' => [
             'alpha2'     => 'YT',
@@ -1731,6 +1875,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Mamoudzou',
             'flag'       => '🇾🇹',
             'phone_code' => '262',
+            'eu_member'  => false,
         ],
         'MX' => [
             'alpha2'     => 'MX',
@@ -1743,6 +1888,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Mexico City',
             'flag'       => '🇲🇽',
             'phone_code' => '52',
+            'eu_member'  => false,
         ],
         'FM' => [
             'alpha2'     => 'FM',
@@ -1755,6 +1901,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Palikir',
             'flag'       => '🇫🇲',
             'phone_code' => '691',
+            'eu_member'  => false,
         ],
         'MD' => [
             'alpha2'     => 'MD',
@@ -1767,6 +1914,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Chișinău',
             'flag'       => '🇲🇩',
             'phone_code' => '373',
+            'eu_member'  => false,
         ],
         'MC' => [
             'alpha2'     => 'MC',
@@ -1779,6 +1927,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Monaco',
             'flag'       => '🇲🇨',
             'phone_code' => '377',
+            'eu_member'  => false,
         ],
         'MN' => [
             'alpha2'     => 'MN',
@@ -1791,6 +1940,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Ulan Bator',
             'flag'       => '🇲🇳',
             'phone_code' => '976',
+            'eu_member'  => false,
         ],
         'ME' => [
             'alpha2'     => 'ME',
@@ -1803,6 +1953,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Podgorica',
             'flag'       => '🇲🇪',
             'phone_code' => '382',
+            'eu_member'  => false,
         ],
         'MS' => [
             'alpha2'     => 'MS',
@@ -1815,6 +1966,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Plymouth',
             'flag'       => '🇲🇸',
             'phone_code' => '1664',
+            'eu_member'  => false,
         ],
         'MA' => [
             'alpha2'     => 'MA',
@@ -1827,6 +1979,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Rabat',
             'flag'       => '🇲🇦',
             'phone_code' => '212',
+            'eu_member'  => false,
         ],
         'MZ' => [
             'alpha2'     => 'MZ',
@@ -1839,6 +1992,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Maputo',
             'flag'       => '🇲🇿',
             'phone_code' => '258',
+            'eu_member'  => false,
         ],
         'MM' => [
             'alpha2'     => 'MM',
@@ -1851,6 +2005,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Naypyidaw',
             'flag'       => '🇲🇲',
             'phone_code' => '95',
+            'eu_member'  => false,
         ],
         'NA' => [
             'alpha2'     => 'NA',
@@ -1863,6 +2018,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Windhoek',
             'flag'       => '🇳🇦',
             'phone_code' => '264',
+            'eu_member'  => false,
         ],
         'NR' => [
             'alpha2'     => 'NR',
@@ -1875,6 +2031,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Yaren',
             'flag'       => '🇳🇷',
             'phone_code' => '674',
+            'eu_member'  => false,
         ],
         'NP' => [
             'alpha2'     => 'NP',
@@ -1884,8 +2041,10 @@ class CountryCodes extends ISODatabaseBase
             'currencies' => ['NPR',],
             'languages'  => ['NE'],
             'continents' => ['AS'],
+            'capital'    => 'Kathmandu',
             'flag'       => '🇳🇵',
             'phone_code' => '977',
+            'eu_member'  => false,
         ],
         'NL' => [
             'alpha2'     => 'NL',
@@ -1898,6 +2057,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Amsterdam',
             'flag'       => '🇳🇱',
             'phone_code' => '31',
+            'eu_member'  => true,
         ],
         'NC' => [
             'alpha2'     => 'NC',
@@ -1910,6 +2070,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Nouméa',
             'flag'       => '🇳🇨',
             'phone_code' => '687',
+            'eu_member'  => false,
         ],
         'NZ' => [
             'alpha2'     => 'NZ',
@@ -1922,6 +2083,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Wellington',
             'flag'       => '🇳🇿',
             'phone_code' => '64',
+            'eu_member'  => false,
         ],
         'NI' => [
             'alpha2'     => 'NI',
@@ -1934,6 +2096,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Managua',
             'flag'       => '🇳🇮',
             'phone_code' => '505',
+            'eu_member'  => false,
         ],
         'NE' => [
             'alpha2'     => 'NE',
@@ -1946,6 +2109,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Niamey',
             'flag'       => '🇳🇪',
             'phone_code' => '227',
+            'eu_member'  => false,
         ],
         'NG' => [
             'alpha2'     => 'NG',
@@ -1958,6 +2122,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Abuja',
             'flag'       => '🇳🇬',
             'phone_code' => '234',
+            'eu_member'  => false,
         ],
         'NU' => [
             'alpha2'     => 'NU',
@@ -1970,6 +2135,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Alofi',
             'flag'       => '🇳🇺',
             'phone_code' => '683',
+            'eu_member'  => false,
         ],
         'NF' => [
             'alpha2'     => 'NF',
@@ -1982,6 +2148,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Kingston',
             'flag'       => '🇳🇫',
             'phone_code' => '672',
+            'eu_member'  => false,
         ],
         'MP' => [
             'alpha2'     => 'MP',
@@ -1994,6 +2161,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Saipan',
             'flag'       => '🇲🇵',
             'phone_code' => '1670',
+            'eu_member'  => false,
         ],
         'NO' => [
             'alpha2'     => 'NO',
@@ -2003,8 +2171,10 @@ class CountryCodes extends ISODatabaseBase
             'currencies' => ['NOK',],
             'languages'  => ['NO', 'SE'],
             'continents' => ['EU'],
+            'capital'    => 'Oslo',
             'flag'       => '🇳🇴',
             'phone_code' => '47',
+            'eu_member'  => false,
         ],
         'OM' => [
             'alpha2'     => 'OM',
@@ -2017,6 +2187,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Muscat',
             'flag'       => '🇴🇲',
             'phone_code' => '968',
+            'eu_member'  => false,
         ],
         'PK' => [
             'alpha2'     => 'PK',
@@ -2029,6 +2200,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Islamabad',
             'flag'       => '🇵🇰',
             'phone_code' => '92',
+            'eu_member'  => false,
         ],
         'PW' => [
             'alpha2'     => 'PW',
@@ -2041,6 +2213,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Ngerulmud',
             'flag'       => '🇵🇼',
             'phone_code' => '680',
+            'eu_member'  => false,
         ],
         'PS' => [
             'alpha2'     => 'PS',
@@ -2053,6 +2226,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Ramallah',
             'flag'       => '🇵🇸',
             'phone_code' => '970',
+            'eu_member'  => false,
         ],
         'PA' => [
             'alpha2'     => 'PA',
@@ -2065,6 +2239,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Panama City',
             'flag'       => '🇵🇦',
             'phone_code' => '507',
+            'eu_member'  => false,
         ],
         'PG' => [
             'alpha2'     => 'PG',
@@ -2077,6 +2252,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Port Moresby',
             'flag'       => '🇵🇬',
             'phone_code' => '675',
+            'eu_member'  => false,
         ],
         'PY' => [
             'alpha2'     => 'PY',
@@ -2089,6 +2265,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Asunción',
             'flag'       => '🇵🇾',
             'phone_code' => '595',
+            'eu_member'  => false,
         ],
         'PE' => [
             'alpha2'     => 'PE',
@@ -2101,6 +2278,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Lima',
             'flag'       => '🇵🇪',
             'phone_code' => '51',
+            'eu_member'  => false,
         ],
         'PH' => [
             'alpha2'     => 'PH',
@@ -2113,6 +2291,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Manila',
             'flag'       => '🇵🇭',
             'phone_code' => '63',
+            'eu_member'  => false,
         ],
         'PN' => [
             'alpha2'     => 'PN',
@@ -2122,8 +2301,10 @@ class CountryCodes extends ISODatabaseBase
             'currencies' => ['NZD',],
             'languages'  => ['EN', 'PIH'],
             'continents' => ['OC'],
+            'capital'    => 'Adamstown',
             'flag'       => '🇵🇳',
             'phone_code' => '64',
+            'eu_member'  => false,
         ],
         'PL' => [
             'alpha2'     => 'PL',
@@ -2136,6 +2317,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Warsaw',
             'flag'       => '🇵🇱',
             'phone_code' => '48',
+            'eu_member'  => true,
         ],
         'PT' => [
             'alpha2'     => 'PT',
@@ -2148,6 +2330,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Lisboa',
             'flag'       => '🇵🇹',
             'phone_code' => '351',
+            'eu_member'  => true,
         ],
         'PR' => [
             'alpha2'     => 'PR',
@@ -2160,6 +2343,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'San Juan',
             'flag'       => '🇵🇷',
             'phone_code' => '1787',
+            'eu_member'  => false,
         ],
         'QA' => [
             'alpha2'     => 'QA',
@@ -2172,6 +2356,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Doha',
             'flag'       => '🇶🇦',
             'phone_code' => '974',
+            'eu_member'  => false,
         ],
         'RE' => [
             'alpha2'     => 'RE',
@@ -2184,6 +2369,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Saint-Denis',
             'flag'       => '🇷🇪',
             'phone_code' => '262',
+            'eu_member'  => false,
         ],
         'RO' => [
             'alpha2'     => 'RO',
@@ -2196,6 +2382,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Bucharest',
             'flag'       => '🇷🇴',
             'phone_code' => '40',
+            'eu_member'  => true,
         ],
         'RU' => [
             'alpha2'     => 'RU',
@@ -2208,6 +2395,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Moscow',
             'flag'       => '🇷🇺',
             'phone_code' => '7',
+            'eu_member'  => false,
         ],
         'RW' => [
             'alpha2'     => 'RW',
@@ -2220,6 +2408,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Kigali',
             'flag'       => '🇷🇼',
             'phone_code' => '250',
+            'eu_member'  => false,
         ],
         'BL' => [
             'alpha2'     => 'BL',
@@ -2232,6 +2421,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Gustavia',
             'flag'       => '🇧🇱',
             'phone_code' => '590',
+            'eu_member'  => false,
         ],
         'SH' => [
             'alpha2'     => 'SH',
@@ -2244,6 +2434,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => NULL,
             'flag'       => '🇸🇭',
             'phone_code' => NULL,
+            'eu_member'  => false,
         ],
         'KN' => [
             'alpha2'     => 'KN',
@@ -2256,6 +2447,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Basseterre',
             'flag'       => '🇰🇳',
             'phone_code' => '1869',
+            'eu_member'  => false,
         ],
         'LC' => [
             'alpha2'     => 'LC',
@@ -2268,6 +2460,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Castries',
             'flag'       => '🇱🇨',
             'phone_code' => '1758',
+            'eu_member'  => false,
         ],
         'MF' => [
             'alpha2'     => 'MF',
@@ -2280,6 +2473,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Marigot',
             'flag'       => '🇲🇫',
             'phone_code' => '590',
+            'eu_member'  => false,
         ],
         'PM' => [
             'alpha2'     => 'PM',
@@ -2292,6 +2486,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Saint-Pierre',
             'flag'       => '🇵🇲',
             'phone_code' => '508',
+            'eu_member'  => false,
         ],
         'VC' => [
             'alpha2'     => 'VC',
@@ -2304,6 +2499,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Kingstown',
             'flag'       => '🇻🇨',
             'phone_code' => '1784',
+            'eu_member'  => false,
         ],
         'WS' => [
             'alpha2'     => 'WS',
@@ -2316,6 +2512,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Apia',
             'flag'       => '🇼🇸',
             'phone_code' => '685',
+            'eu_member'  => false,
         ],
         'SM' => [
             'alpha2'     => 'SM',
@@ -2328,6 +2525,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'City of San Marino',
             'flag'       => '🇸🇲',
             'phone_code' => '378',
+            'eu_member'  => false,
         ],
         'ST' => [
             'alpha2'     => 'ST',
@@ -2340,6 +2538,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'São Tomé',
             'flag'       => '🇸🇹',
             'phone_code' => '239',
+            'eu_member'  => false,
         ],
         'SA' => [
             'alpha2'     => 'SA',
@@ -2352,6 +2551,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Riyadh',
             'flag'       => '🇸🇦',
             'phone_code' => '966',
+            'eu_member'  => false,
         ],
         'SN' => [
             'alpha2'     => 'SN',
@@ -2364,6 +2564,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Dakar',
             'flag'       => '🇸🇳',
             'phone_code' => '221',
+            'eu_member'  => false,
         ],
         'RS' => [
             'alpha2'     => 'RS',
@@ -2376,6 +2577,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Belgrade',
             'flag'       => '🇷🇸',
             'phone_code' => '381',
+            'eu_member'  => false,
         ],
         'SC' => [
             'alpha2'     => 'SC',
@@ -2388,6 +2590,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Victoria',
             'flag'       => '🇸🇨',
             'phone_code' => '248',
+            'eu_member'  => false,
         ],
         'SL' => [
             'alpha2'     => 'SL',
@@ -2400,6 +2603,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Freetown',
             'flag'       => '🇸🇱',
             'phone_code' => '232',
+            'eu_member'  => false,
         ],
         'SG' => [
             'alpha2'     => 'SG',
@@ -2412,6 +2616,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Singapore',
             'flag'       => '🇸🇬',
             'phone_code' => '65',
+            'eu_member'  => false,
         ],
         'SX' => [
             'alpha2'     => 'SX',
@@ -2424,6 +2629,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Philipsburg',
             'flag'       => '🇸🇽',
             'phone_code' => '1721',
+            'eu_member'  => false,
         ],
         'SK' => [
             'alpha2'     => 'SK',
@@ -2436,6 +2642,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Bratislava',
             'flag'       => '🇸🇰',
             'phone_code' => '421',
+            'eu_member'  => true,
         ],
         'SI' => [
             'alpha2'     => 'SI',
@@ -2448,6 +2655,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Ljubljana',
             'flag'       => '🇸🇮',
             'phone_code' => '386',
+            'eu_member'  => true,
         ],
         'SB' => [
             'alpha2'     => 'SB',
@@ -2460,6 +2668,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Honiara',
             'flag'       => '🇸🇧',
             'phone_code' => '677',
+            'eu_member'  => false,
         ],
         'SO' => [
             'alpha2'     => 'SO',
@@ -2472,6 +2681,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Mogadishu',
             'flag'       => '🇸🇴',
             'phone_code' => '252',
+            'eu_member'  => false,
         ],
         'ZA' => [
             'alpha2'     => 'ZA',
@@ -2484,6 +2694,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Pretoria',
             'flag'       => '🇿🇦',
             'phone_code' => '27',
+            'eu_member'  => false,
         ],
         'GS' => [
             'alpha2'     => 'GS',
@@ -2496,6 +2707,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'King Edward Point',
             'flag'       => '🇬🇸',
             'phone_code' => '500',
+            'eu_member'  => false,
         ],
         'SS' => [
             'alpha2'     => 'SS',
@@ -2508,6 +2720,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Juba',
             'flag'       => '🇸🇸',
             'phone_code' => '211',
+            'eu_member'  => false,
         ],
         'ES' => [
             'alpha2'     => 'ES',
@@ -2520,6 +2733,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Madrid',
             'flag'       => '🇪🇸',
             'phone_code' => '34',
+            'eu_member'  => true,
         ],
         'LK' => [
             'alpha2'     => 'LK',
@@ -2532,6 +2746,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Colombo',
             'flag'       => '🇱🇰',
             'phone_code' => '94',
+            'eu_member'  => false,
         ],
         'SD' => [
             'alpha2'     => 'SD',
@@ -2544,6 +2759,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Khartoum',
             'flag'       => '🇸🇩',
             'phone_code' => '249',
+            'eu_member'  => false,
         ],
         'SR' => [
             'alpha2'     => 'SR',
@@ -2556,6 +2772,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Paramaribo',
             'flag'       => '🇸🇷',
             'phone_code' => '597',
+            'eu_member'  => false,
         ],
         'SJ' => [
             'alpha2'     => 'SJ',
@@ -2568,6 +2785,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Longyearbyen',
             'flag'       => '🇸🇯',
             'phone_code' => '4779',
+            'eu_member'  => false,
         ],
         'SE' => [
             'alpha2'     => 'SE',
@@ -2580,6 +2798,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Stockholm',
             'flag'       => '🇸🇪',
             'phone_code' => '46',
+            'eu_member'  => true,
         ],
         'CH' => [
             'alpha2'     => 'CH',
@@ -2592,6 +2811,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Bern',
             'flag'       => '🇨🇭',
             'phone_code' => '41',
+            'eu_member'  => false,
         ],
         'SY' => [
             'alpha2'     => 'SY',
@@ -2604,6 +2824,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Damascus',
             'flag'       => '🇸🇾',
             'phone_code' => '963',
+            'eu_member'  => false,
         ],
         'TW' => [
             'alpha2'     => 'TW',
@@ -2616,6 +2837,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Taipei',
             'flag'       => '🇹🇼',
             'phone_code' => '886',
+            'eu_member'  => false,
         ],
         'TJ' => [
             'alpha2'     => 'TJ',
@@ -2628,6 +2850,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Dushanbe',
             'flag'       => '🇹🇯',
             'phone_code' => '992',
+            'eu_member'  => false,
         ],
         'TZ' => [
             'alpha2'     => 'TZ',
@@ -2640,6 +2863,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Dodoma',
             'flag'       => '🇹🇿',
             'phone_code' => '255',
+            'eu_member'  => false,
         ],
         'TH' => [
             'alpha2'     => 'TH',
@@ -2652,6 +2876,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Bangkok',
             'flag'       => '🇹🇭',
             'phone_code' => '66',
+            'eu_member'  => false,
         ],
         'TL' => [
             'alpha2'     => 'TL',
@@ -2664,6 +2889,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Dili',
             'flag'       => '🇹🇱',
             'phone_code' => '670',
+            'eu_member'  => false,
         ],
         'TG' => [
             'alpha2'     => 'TG',
@@ -2676,6 +2902,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Lomé',
             'flag'       => '🇹🇬',
             'phone_code' => '228',
+            'eu_member'  => false,
         ],
         'TK' => [
             'alpha2'     => 'TK',
@@ -2688,6 +2915,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Fakaofo',
             'flag'       => '🇹🇰',
             'phone_code' => '690',
+            'eu_member'  => false,
         ],
         'TO' => [
             'alpha2'     => 'TO',
@@ -2700,6 +2928,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Nuku\'alofa',
             'flag'       => '🇹🇴',
             'phone_code' => '676',
+            'eu_member'  => false,
         ],
         'TT' => [
             'alpha2'     => 'TT',
@@ -2712,6 +2941,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Port of Spain',
             'flag'       => '🇹🇹',
             'phone_code' => '1868',
+            'eu_member'  => false,
         ],
         'TN' => [
             'alpha2'     => 'TN',
@@ -2724,6 +2954,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Tunis',
             'flag'       => '🇹🇳',
             'phone_code' => '216',
+            'eu_member'  => false,
         ],
         'TR' => [
             'alpha2'     => 'TR',
@@ -2732,10 +2963,11 @@ class CountryCodes extends ISODatabaseBase
             'tld'        => '.tr',
             'currencies' => ['TRY',],
             'languages'  => ['TR'],
-            'continents' => ['AS'],
+            'continents' => ['AS', 'EU'],
             'capital'    => 'Ankara',
             'flag'       => '🇹🇷',
             'phone_code' => '90',
+            'eu_member'  => false,
         ],
         'TM' => [
             'alpha2'     => 'TM',
@@ -2748,6 +2980,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Ashgabat',
             'flag'       => '🇹🇲',
             'phone_code' => '993',
+            'eu_member'  => false,
         ],
         'TC' => [
             'alpha2'     => 'TC',
@@ -2760,6 +2993,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Cockburn Town',
             'flag'       => '🇹🇨',
             'phone_code' => '1649',
+            'eu_member'  => false,
         ],
         'TV' => [
             'alpha2'     => 'TV',
@@ -2772,6 +3006,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Funafuti',
             'flag'       => '🇹🇻',
             'phone_code' => '688',
+            'eu_member'  => false,
         ],
         'UG' => [
             'alpha2'     => 'UG',
@@ -2784,6 +3019,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Kampala',
             'flag'       => '🇺🇬',
             'phone_code' => '256',
+            'eu_member'  => false,
         ],
         'UA' => [
             'alpha2'     => 'UA',
@@ -2796,6 +3032,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Kyiv',
             'flag'       => '🇺🇦',
             'phone_code' => '380',
+            'eu_member'  => false,
         ],
         'AE' => [
             'alpha2'     => 'AE',
@@ -2808,6 +3045,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Abu Dhabi',
             'flag'       => '🇦🇪',
             'phone_code' => '971',
+            'eu_member'  => false,
         ],
         'GB' => [
             'alpha2'     => 'GB',
@@ -2820,6 +3058,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'London',
             'flag'       => '🇬🇧',
             'phone_code' => '44',
+            'eu_member'  => false,
         ],
         'US' => [
             'alpha2'     => 'US',
@@ -2832,6 +3071,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Washington D.C.',
             'flag'       => '🇺🇸',
             'phone_code' => '1',
+            'eu_member'  => false,
         ],
         'UM' => [
             'alpha2'     => 'UM',
@@ -2844,6 +3084,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => null,
             'flag'       => '🇺🇲',
             'phone_code' => '246',
+            'eu_member'  => false,
         ],
         'UY' => [
             'alpha2'     => 'UY',
@@ -2856,6 +3097,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Montevideo',
             'flag'       => '🇺🇾',
             'phone_code' => '598',
+            'eu_member'  => false,
         ],
         'UZ' => [
             'alpha2'     => 'UZ',
@@ -2868,6 +3110,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Tashkent',
             'flag'       => '🇺🇿',
             'phone_code' => '998',
+            'eu_member'  => false,
         ],
         'VU' => [
             'alpha2'     => 'VU',
@@ -2880,6 +3123,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Port Vila',
             'flag'       => '🇻🇺',
             'phone_code' => '678',
+            'eu_member'  => false,
         ],
         'VE' => [
             'alpha2'     => 'VE',
@@ -2892,6 +3136,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Caracas',
             'flag'       => '🇻🇪',
             'phone_code' => '58',
+            'eu_member'  => false,
         ],
         'VN' => [
             'alpha2'     => 'VN',
@@ -2904,6 +3149,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Hanoi',
             'flag'       => '🇻🇳',
             'phone_code' => '84',
+            'eu_member'  => false,
         ],
         'VG' => [
             'alpha2'     => 'VG',
@@ -2916,6 +3162,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Road Town',
             'flag'       => '🇻🇬',
             'phone_code' => '1284',
+            'eu_member'  => false,
         ],
         'VI' => [
             'alpha2'     => 'VI',
@@ -2928,6 +3175,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Charlotte Amalie',
             'flag'       => '🇻🇮',
             'phone_code' => '1340',
+            'eu_member'  => false,
         ],
         'WF' => [
             'alpha2'     => 'WF',
@@ -2940,6 +3188,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Mata-Utu',
             'flag'       => '🇼🇫',
             'phone_code' => '681',
+            'eu_member'  => false,
         ],
         'EH' => [
             'alpha2'     => 'EH',
@@ -2952,6 +3201,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'El Aaiún',
             'flag'       => '🇪🇭',
             'phone_code' => '212',
+            'eu_member'  => false,
         ],
         'YE' => [
             'alpha2'     => 'YE',
@@ -2964,6 +3214,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Sana\'a',
             'flag'       => '🇾🇪',
             'phone_code' => '967',
+            'eu_member'  => false,
         ],
         'ZM' => [
             'alpha2'     => 'ZM',
@@ -2976,6 +3227,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Lusaka',
             'flag'       => '🇿🇲',
             'phone_code' => '260',
+            'eu_member'  => false,
         ],
         'ZW' => [
             'alpha2'     => 'ZW',
@@ -2988,6 +3240,7 @@ class CountryCodes extends ISODatabaseBase
             'capital'    => 'Harare',
             'flag'       => '🇿🇼',
             'phone_code' => '263',
+            'eu_member'  => false,
         ],
     ];
 }

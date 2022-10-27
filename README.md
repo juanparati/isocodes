@@ -1,4 +1,4 @@
-# ISOCodes
+# 🌐 ISOCodes
 
 ## What is it?
 
@@ -13,16 +13,17 @@ This library provides the following ISOs and codes:
 - [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (Language codes)
 - [International dialing codes](https://en.wikipedia.org/wiki/List_of_country_calling_codes)
 - [Unicode flags](https://en.wikipedia.org/wiki/Regional_indicator_symbol)
+- [European Union Members](https://european-union.europa.eu/principles-countries-history/country-profiles_en)
 
 This library provides localized names for countries, currencies and languages. The library allows to create custom/new locales.
 
-RDMS like MySQL or SQLite is not required in order to use this library. All the database files are maintained in separate files that are loaded on demand in a way that keep a low footprint.
+RDMS like MySQL or SQLite is not required in order to use this library. All the database files are maintained in separate files that are loaded on demand in a way that keep a low memory footprint.
 
 ### Disclaimer
 
 This library data is based on international standards recognized by global organizations, the author is not responsible about how the translations and geopolitical data is represented.
 
-If you feel that this library data doesn't comply with the geopolitical views required by your project, please [register a custom database](#custom-databases-and-locales). 
+If you feel that this library data doesn't comply with the geopolitical views required by your project, fell free to [register a custom dataset](#custom-dataset-and-locales). 
 
 ## Composer
 
@@ -43,22 +44,22 @@ This library is compatible with Laravel 8.x+ however it can work as a standalone
 
 ### Configuration
 
-Publish configuration file (Required only when custom locales are required):
+Publish configuration file (Required only when custom dataset or locales are required):
 
     artisan vendor:publish --provider="Juanparati\ISOCodes\Providers\ISOCodesProvider"
 
 
 ## Usage
 
-The list of results are returned as [Collections](https://laravel.com/docs/8.x/collections#method-flip).
+The list of results are returned as [Collections](https://laravel.com/docs/9.x/collections).
 
-### byCountry
+### Countries
 
-Get the list of all country codes:
+Get the list of all country codes as an array:
 
-    (new ISOCodes)->byCountry()->all()->toArray();
+    (new ISOCodes)->countries()->toArray();
 
-It returns something like:
+It returns something like this:
 
     [
     ...
@@ -80,52 +81,58 @@ It returns something like:
             "capital"    => "Tirana",
             "flag"       => "🇦🇱",
             "phone_code" => "355",
+            "eu_member"  => false
         ]
     ...
     ];
 
 
+Retrieve all the countries as a Collection:
+
+    (new ISOCodes)
+        ->countries()
+        ->all();
+
 Retrieve one specific country:
 
     (new ISOCodes)
-        ->byCountry()
-        ->all()
+        ->countries()
         ->firstWhere('alpha2', 'ES');
 
-or
+or using the shortcut
 
     (new ISOCodes)
-        ->byCountry()
-        ->byAlpha2('ES');
+        ->countries()
+        ->findByAlpha2('ES');
 
 Retrieve all the countries located in Europe:
 
     (new ISOCodes)
-        ->byCountry()
-        ->byContinent('EU');
+        ->countries()
+        ->whereContinent('EU');
 
-Retrieve all the countries located *only* in Europe:
+Retrieve all the countries located **only** in Europe:
 
     (new ISOCodes)
-        ->byCountry()
-        ->byContinent('EU', true);
+        ->countries()
+        ->whereContinent('EU', true);
 
 Retrieve all the countries located in Europe and Asia:
 
     (new ISOCodes)
-        ->byCountry()
-        ->byContinent(['EU', 'AS'], true);
+        ->countries()
+        ->whereContinent(['EU', 'AS'], true);
 
-Retrieve all the countries located in Europe or Asia
-
-    (new ISOCodes)
-        ->byCountry()
-        ->byContinent(['EU', 'AS']);
-
-Retrieve all the countries sorted by numeric code descending that uses *only* Euro as currency:
+Retrieve all the countries located in Europe **or** Asia
 
     (new ISOCodes)
-        ->byCountry()
+        ->countries()
+        ->whereContinent(['EU', 'AS']);
+
+Retrieve all the countries sorted by numeric code descending that uses **only** Euro as currency:
+
+    (new ISOCodes)
+        ->countries()
         ->all()
         ->where('currencies', ['EUR'])
         ->sortByDesc('numeric');
@@ -133,24 +140,24 @@ Retrieve all the countries sorted by numeric code descending that uses *only* Eu
 or
 
     (new ISOCodes)
-        ->byCountry()
-        ->byCurrency('EUR', true)
+        ->countries()
+        ->whereCurrency('EUR', true)
         ->sortByDesc('numeric');
 
-Retrieve all the countries that uses *at least* Euro as currency:
+Retrieve all the countries that uses **at least** Euro as currency:
 
     (new ISOCodes)
-        ->byCountry()
-        ->byCurrency('EUR');
+        ->countries()
+        ->whereCurrency('EUR');
 
 
-Create a list of countries with their names (useful for a dynamic listbox):
+Create a list of countries with their names (useful for generate a listbox options):
 
     (new ISOCodes)
-        ->byCountry()
+        ->countries()
         ->map(fn ($iso) => [
-            'label' => $iso['name'] . ' (' . $iso['alpha2'] . ')',
-            'value' => $iso['alpha2']
+            'label' => $iso->name . ' (' . $iso->alpha2 . ')',
+            'value' => $iso->alpha2
         ])
         ->sortBy('label')
         ->values();
@@ -158,17 +165,17 @@ Create a list of countries with their names (useful for a dynamic listbox):
 Retrieve a list of countries that has Portuguese as one of their official languages:
 
     (new ISOCodes)
-        ->byCountry()
-        ->byLanguage('PT');
+        ->countries()
+        ->whereLanguage('PT');
 
 * Note that most spoken language should be always the first in the list.
 
 
-### byLanguage
+### Languages
 
 Get the list grouped by language:
 
-    (new ISOCodes)->byLanguage()->all()->toArray();
+    (new ISOCodes)->languages()->toArray();
 
 It returns something like:
 
@@ -201,19 +208,37 @@ It returns something like:
     ];
 
 
-### byContinent
+### whereContinent
 
 Get the list grouped by continent.
 
 
-### byCurrency
+### whereCurrency
 
 Get the list grouped by currency.
 
 
-### byCurrencyNumber
+### whereCurrencyNumber
 
 Get the list grouped by currency number.
+
+### Property access
+
+Each record array member can be accessed using the array and object syntax.
+
+Example:
+
+    $spain = (new ISOCodes)
+        ->countries()
+        ->findByAlpha2('ES');
+
+    $spain->name;    // Spain
+    $spain['name'];  // Spain
+
+    $spain->toArray();  // Get record as array
+    $spain->toJson();   // Get record as Json
+
+Each record is serializable, that it make it ideal in order to store the results into a cache.
 
 
 ### Use currency numbers instead of currency codes.
@@ -223,7 +248,7 @@ The method `setCurrencyAsNumber` specify if the currency code is returned as a n
 Example:
 
     (new ISOCodes)
-        ->byCountry()
+        ->countries()
         ->setCurrencyAsNumber(true)
         ->all();
 
@@ -246,11 +271,12 @@ The available node formats are:
 Examples:
 
     (new ISOCodes)
-        ->byCountry()
-        ->setResolution('currencies', ByCountryModel::NODE_AS_ALL)
-        ->setResolution('languages', ByCountryModel::NODE_AS_NAME)
-        ->setResolution('continents', ByCountryModel::NODE_AS_NONE)
-        ->byAlpha2('PT');
+        ->countries()
+        ->setResolution('currencies', CountryModel::NODE_AS_ALL)
+        ->setResolution('languages', CountryModel::NODE_AS_NAME)
+        ->setResolution('continents', CountryModel::NODE_AS_NONE)
+        ->findByAlpha2('PT')
+        ->toArray();
 
 returns the following:
 
@@ -269,6 +295,7 @@ returns the following:
         "capital"    => "Lisboa",
         "flag"       => "🇵🇹",
         "phone_code" => "351",
+        "eu_member"  => true
     ]
 
 instead of:
@@ -291,20 +318,22 @@ instead of:
         "capital"    => "Lisboa",
         "flag"       => "🇵🇹",
         "phone_code" => "351",
+        "eu_member"  => true
     ]
 
-The node resolutions works with the others models like "byCurrency", "byLanguage", etc.
+The node resolutions works with the others models like "currencies", "languages", etc.
 
 
-## Custom databases and locales
+## Custom dataset and locales
 
-It's possible to register custom databases and locales during the ISOCodes instantiation.
+It's possible to register custom datasets and locales during the ISOCodes instantiation.
 
 
 Example:
 
     new ISOCodes(['countries' => MyCountryTranslation::class])
 
+See the following example with the [country names](./src/Data/Countries/CountriesEN.php).
 
 ## Contributions
 

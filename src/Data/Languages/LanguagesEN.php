@@ -1,15 +1,15 @@
 <?php
 
-namespace Juanparati\ISOCodes\Databases\Languages;
+namespace Juanparati\ISOCodes\Data\Languages;
 
-use Juanparati\ISOCodes\Databases\ISODatabaseBase;
+use Juanparati\ISOCodes\Data\ISODataBase;
 
 /**
  * List of languages (English).
  *
  * @see https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
  */
-class LanguagesEN extends ISODatabaseBase
+class LanguagesEN extends ISODataBase
 {
     protected array $db = [
         'AA' => 'Afar',

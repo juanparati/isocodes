@@ -4,7 +4,8 @@ namespace Juanparati\ISOCodes\Tests\test;
 
 use Illuminate\Support\Collection;
 use Juanparati\ISOCodes\ISOCodes;
-use Juanparati\ISOCodes\Models\ByCountryModel;
+use Juanparati\ISOCodes\Models\CountryModel;
+use Juanparati\ISOCodes\Models\ModelRecord;
 use PHPUnit\Framework\TestCase;
 
 class CountriesTest extends TestCase
@@ -65,7 +66,7 @@ class CountriesTest extends TestCase
         /**
          * @var Collection $countries
          */
-        $countries = $iso->byCountry()->all();
+        $countries = $iso->countries()->all();
 
         $this->assertGreaterThan(100, $countries->count());
 
@@ -86,33 +87,34 @@ class CountriesTest extends TestCase
     public function testByAlpha2() {
         $iso = new ISOCodes();
 
-        $country = $iso->byCountry()->byAlpha2('foo');
+        $country = $iso->countries()->findByAlpha2('foo');
         $this->assertNull($country);
 
-        $country = $iso->byCountry()->byAlpha2('es');
+        $country = $iso->countries()->findByAlpha2('es');
+
         $this->assertCountry($this->testNodeCode + $this->testCountry, $country);
 
-        $country = $iso->byCountry()
-            ->setResolution('currencies', ByCountryModel::NODE_AS_ALL)
-            ->setResolution('continents', ByCountryModel::NODE_AS_ALL)
-            ->setResolution('languages' , ByCountryModel::NODE_AS_ALL)
-            ->byAlpha2('es');
+        $country = $iso->countries()
+            ->setResolution('currencies', CountryModel::NODE_AS_ALL)
+            ->setResolution('continents', CountryModel::NODE_AS_ALL)
+            ->setResolution('languages' , CountryModel::NODE_AS_ALL)
+            ->findByAlpha2('es');
 
         $this->assertCountry($this->testNodeAll + $this->testCountry, $country);
 
-        $country = $iso->byCountry()
-            ->setResolution('currencies', ByCountryModel::NODE_AS_NAME)
-            ->setResolution('continents', ByCountryModel::NODE_AS_NAME)
-            ->setResolution('languages' , ByCountryModel::NODE_AS_NAME)
-            ->byAlpha2('es');
+        $country = $iso->countries()
+            ->setResolution('currencies', CountryModel::NODE_AS_NAME)
+            ->setResolution('continents', CountryModel::NODE_AS_NAME)
+            ->setResolution('languages' , CountryModel::NODE_AS_NAME)
+            ->findByAlpha2('es');
 
         $this->assertCountry($this->testNodeName + $this->testCountry, $country);
 
-        $country = $iso->byCountry()
-            ->setResolution('currencies', ByCountryModel::NODE_AS_NONE)
-            ->setResolution('continents', ByCountryModel::NODE_AS_NONE)
-            ->setResolution('languages' , ByCountryModel::NODE_AS_NONE)
-            ->byAlpha2('es');
+        $country = $iso->countries()
+            ->setResolution('currencies', CountryModel::NODE_AS_NONE)
+            ->setResolution('continents', CountryModel::NODE_AS_NONE)
+            ->setResolution('languages' , CountryModel::NODE_AS_NONE)
+            ->findByAlpha2('es');
 
         $this->assertArrayNotHasKey('countries', $country);
         $this->assertArrayNotHasKey('currencies', $country);
@@ -127,7 +129,7 @@ class CountriesTest extends TestCase
     public function testByAlpha3() {
         $iso = new ISOCodes();
 
-        $country = $iso->byCountry()->byAlpha3('esp');
+        $country = $iso->countries()->findByAlpha3('esp');
 
         $this->assertCountry($this->testNodeCode + $this->testCountry, $country);
     }
@@ -139,7 +141,7 @@ class CountriesTest extends TestCase
     public function testByNumberic() {
         $iso = new ISOCodes();
 
-        $country = $iso->byCountry()->byNumeric('724');
+        $country = $iso->countries()->findByNumeric('724');
 
         $this->assertCountry($this->testNodeCode + $this->testCountry, $country);
     }
@@ -151,10 +153,10 @@ class CountriesTest extends TestCase
     public function testByTld() {
         $iso = new ISOCodes();
 
-        $country = $iso->byCountry()->byTld('ES');
+        $country = $iso->countries()->findByTld('ES');
         $this->assertCountry($this->testNodeCode + $this->testCountry, $country);
 
-        $country = $iso->byCountry()->byTld('.es');
+        $country = $iso->countries()->findByTld('.es');
         $this->assertCountry($this->testNodeCode + $this->testCountry, $country);
     }
 
@@ -167,13 +169,13 @@ class CountriesTest extends TestCase
     public function testByName() {
         $iso = new ISOCodes();
 
-        $country = $iso->byCountry()->byName('spain');
+        $country = $iso->countries()->findByName('spain');
         $this->assertCountry($this->testNodeCode + $this->testCountry, $country);
 
-        $country = $iso->byCountry()->byName('spAIn');
+        $country = $iso->countries()->findByName('spAIn');
         $this->assertCountry($this->testNodeCode + $this->testCountry, $country);
 
-        $country = $iso->byCountry()->byName('Lalandia');
+        $country = $iso->countries()->findByName('Lalandia');
         $this->assertNull($country);
     }
 
@@ -184,18 +186,23 @@ class CountriesTest extends TestCase
     public function testCurrencyAsNumber() {
         $iso = new ISOCodes();
 
-        $country = $iso->byCountry()
+        $country = $iso->countries()
             ->setCurrencyAsNumber(true)
-            ->byAlpha2('es');
+            ->findByAlpha2('es');
 
         $this->assertEquals($country['currencies'], ['978']);
 
-        $country = $iso->byCountry()
+        $country = $iso->countries()
             ->setCurrencyAsNumber(true)
-            ->setResolution('currencies', ByCountryModel::NODE_AS_ALL)
-            ->byAlpha2('es');
+            ->setResolution('currencies', CountryModel::NODE_AS_ALL)
+            ->findByAlpha2('es');
 
         $this->assertEquals($country['currencies'], ['978' => 'Euro']);
+    }
+
+
+    public function testContinentSearch() {
+        $this->assertCount(2, (new ISOCodes())->countries()->whereContinent(['AS', 'EU'], true));
     }
 
 
@@ -203,9 +210,9 @@ class CountriesTest extends TestCase
      * Assert expected country.
      *
      * @param array $expected
-     * @param array $country
+     * @param \ArrayAccess|ModelRecord $country
      */
-    protected function assertCountry(array $expected, array $country) {
+    protected function assertCountry(array $expected, \ArrayAccess|ModelRecord $country) {
         foreach ($expected as $key => $value)
             $this->assertEquals($country[$key], $value);
     }
