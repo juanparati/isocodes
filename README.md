@@ -17,7 +17,7 @@ This library provides the following ISOs and codes:
 
 This library provides localized names for countries, currencies and languages. The library allows to create custom/new locales.
 
-RDMS like MySQL or SQLite is not required in order to use this library. All the database files are maintained in separate files that are loaded on demand in a way that keep a low memory footprint.
+RDMS like MySQL or SQLite is not required in order to use this library. All the data is maintained in separate files that are loaded and linked on demand in a way that keeps a low memory footprint.
 
 ### Disclaimer
 
