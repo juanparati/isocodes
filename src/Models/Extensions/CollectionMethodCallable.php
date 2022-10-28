@@ -10,8 +10,8 @@ trait CollectionMethodCallable
     /**
      * Call a method from Collection.
      *
-     * @param string $method
-     * @param array|null $parameters
+     * @param $method
+     * @param $parameters
      * @return mixed
      * @throws \Juanparati\ISOCodes\Exceptions\ISONodeAttributeMissing
      */
@@ -22,8 +22,6 @@ trait CollectionMethodCallable
             return call_user_func_array([$all, $method], $parameters);
         }
 
-        throw new \BadMethodCallException(
-            sprintf('Method not available into %s or Collection', static::class)
-        );
+        return parent::__call($method, $parameters);
     }
 }

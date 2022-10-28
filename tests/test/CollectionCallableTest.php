@@ -17,4 +17,19 @@ class CollectionCallableTest extends TestCase
         $this->assertEquals(1, $iso->currencies()->where(fn($c) => $c->code === 'BBD')->count());
     }
 
+
+    public function testMacroable() {
+        \Juanparati\ISOCodes\Models\CountryModel::macro('allEUMembers', function () {
+            return $this->where('eu_member', true)->all();
+        });
+
+        $iso = new ISOCodes();
+
+        $euMembers = $iso->countries()->allEUMembers();
+        $this->assertCount(27, $euMembers);
+
+        // GB leave us 😢
+        $this->assertTrue($iso->countries()->where('eu_member', false)->contains(fn($c) => $c->alpha2 === 'GB'));
+    }
+
 }

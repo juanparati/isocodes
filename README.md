@@ -53,7 +53,7 @@ Publish configuration file (Required only when custom dataset or locales are req
 
 The list of results are returned as [Collections](https://laravel.com/docs/9.x/collections).
 
-### Countries
+### Country model
 
 Get the list of all country codes as an array:
 
@@ -171,7 +171,7 @@ Retrieve a list of countries that has Portuguese as one of their official langua
 * Note that most spoken language should be always the first in the list.
 
 
-### Languages
+### Language model
 
 Get the list grouped by language:
 
@@ -208,19 +208,32 @@ It returns something like:
     ];
 
 
-### whereContinent
+### Continent model
 
 Get the list grouped by continent.
 
+Example:
 
-### whereCurrency
+    (new ISOCodes)->continents()->toArray();
+
+
+### Currency model
 
 Get the list grouped by currency.
 
+Example:
 
-### whereCurrencyNumber
+    (new ISOCodes)->currencies()->toArray();
+
+
+### CurrencyNumber model
 
 Get the list grouped by currency number.
+
+Example:
+
+    (new ISOCodes)->currencyNumbers()->toArray();
+
 
 ### Property access
 
@@ -334,6 +347,19 @@ Example:
     new ISOCodes(['countries' => MyCountryTranslation::class])
 
 See the following example with the [country names](./src/Data/Countries/CountriesEN.php).
+
+
+## Macroable models
+
+The models are macroable so it's possible to inject custom methods.
+
+Example:
+
+    \Juanparati\ISOCodes\Models\CountryModel::macro('allEUMembers', function () {
+        return $this->where('eu_member', true)->all();
+    });
+
+    (new ISOCodes)->countries()->allEUMembers()->count();   // 27
 
 ## Contributions
 
