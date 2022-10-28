@@ -68,13 +68,13 @@ It returns something like this:
             "alpha3"     => "ALB",
             "numeric"    => "008",
             "tld"        => ".al",
-            "currencies" => Collection [
+            "currencies" => [
                 'ALL'
             ],
-            "languages"  => Collection [
+            "languages"  => [
                 "SQ",
             ],
-            "continents" => Collection [
+            "continents" => [
                 "EU",
             ],
             "name"       => "Albania",
@@ -184,7 +184,7 @@ It returns something like:
         "CA" => [
             "code" => "CA",
             "name" => "Catalan",
-            "countries" => Collection [
+            "countries" => [
                 [
                     "alpha2"     => "AD",
                     "alpha3"     => "AND",
@@ -197,10 +197,10 @@ It returns something like:
                 ],
                 ...
             ],
-            "currencies" => Collection [
+            "currencies" => [
                 "EUR",
             ],
-            "continents" => Collection [
+            "continents" => [
                 "EU",
             ],
         ]
