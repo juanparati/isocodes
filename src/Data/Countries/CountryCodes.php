@@ -724,7 +724,7 @@ class CountryCodes extends ISODataBase
             'alpha3'     => 'HRV',
             'numeric'    => '191',
             'tld'        => '.hr',
-            'currencies' => ['HRK',],
+            'currencies' => ['EUR','HRK',],
             'languages'  => ['HR', 'SR', 'HU', 'CS', 'SK'],
             'continents' => ['EU'],
             'capital'    => 'Zagreb',
