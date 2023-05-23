@@ -89,84 +89,107 @@ It returns something like this:
 
 Retrieve all the countries as a Collection:
 
-    (new ISOCodes)
-        ->countries()
-        ->all();
+```php
+(new ISOCodes)
+    ->countries()
+    ->all();
+```
 
 Retrieve one specific country:
 
-    (new ISOCodes)
-        ->countries()
-        ->firstWhere('alpha2', 'ES');
+```php
+(new ISOCodes)
+    ->countries()
+    ->firstWhere('alpha2', 'ES');
+```
 
 or using the shortcut
 
-    (new ISOCodes)
-        ->countries()
-        ->findByAlpha2('ES');
+```php
+(new ISOCodes)
+    ->countries()
+    ->findByAlpha2('ES');
+```
 
 Retrieve all the countries located in Europe:
 
-    (new ISOCodes)
-        ->countries()
-        ->whereContinent('EU');
+```php
+(new ISOCodes)
+    ->countries()
+    ->whereContinent('EU');
+```
 
 Retrieve all the countries located **only** in Europe:
 
-    (new ISOCodes)
-        ->countries()
-        ->whereContinent('EU', true);
+```php
+(new ISOCodes)
+    ->countries()
+    ->whereContinent('EU', true);
+```
 
 Retrieve all the countries located in Europe and Asia:
 
-    (new ISOCodes)
-        ->countries()
-        ->whereContinent(['EU', 'AS'], true);
+```php
+(new ISOCodes)
+    ->countries()
+    ->whereContinent(['EU', 'AS'], true);
+```
 
 Retrieve all the countries located in Europe **or** Asia
 
-    (new ISOCodes)
-        ->countries()
-        ->whereContinent(['EU', 'AS']);
+```php
+(new ISOCodes)
+    ->countries()
+    ->whereContinent(['EU', 'AS']);
+```
 
 Retrieve all the countries sorted by numeric code descending that uses **only** Euro as currency:
 
-    (new ISOCodes)
-        ->countries()
-        ->all()
-        ->where('currencies', ['EUR'])
-        ->sortByDesc('numeric');
+```php
+(new ISOCodes)
+    ->countries()
+    ->all()
+    ->where('currencies', ['EUR'])
+    ->sortByDesc('numeric');
+```
 
 or
 
-    (new ISOCodes)
-        ->countries()
-        ->whereCurrency('EUR', true)
-        ->sortByDesc('numeric');
+```php
+(new ISOCodes)
+    ->countries()
+    ->whereCurrency('EUR', true)
+    ->sortByDesc('numeric');
+```
 
 Retrieve all the countries that uses **at least** Euro as currency:
 
-    (new ISOCodes)
-        ->countries()
-        ->whereCurrency('EUR');
-
+```php
+(new ISOCodes)
+    ->countries()
+    ->whereCurrency('EUR');
+```
 
 Create a list of countries with their names (useful for generate a listbox options):
 
-    (new ISOCodes)
-        ->countries()
-        ->map(fn ($iso) => [
-            'label' => $iso->name . ' (' . $iso->alpha2 . ')',
-            'value' => $iso->alpha2
-        ])
-        ->sortBy('label')
-        ->values();
+```php
+(new ISOCodes)
+    ->countries()
+    ->map(fn ($iso) => [
+        'label' => $iso->name . ' (' . $iso->alpha2 . ')',
+        'value' => $iso->alpha2
+    ])
+    ->sortBy('label')
+    ->values();
+```
 
 Retrieve a list of countries that has Portuguese as one of their official languages:
 
-    (new ISOCodes)
-        ->countries()
-        ->whereLanguage('PT');
+```php
+(new ISOCodes)
+    ->countries()
+    ->whereLanguage('PT');
+```
 
 * Note that most spoken language should be always the first in the list.
 
@@ -175,7 +198,9 @@ Retrieve a list of countries that has Portuguese as one of their official langua
 
 Get the list grouped by language:
 
-    (new ISOCodes)->languages()->toArray();
+```php
+(new ISOCodes)->languages()->toArray();
+```
 
 It returns something like:
 
@@ -214,7 +239,9 @@ Get the list grouped by continent.
 
 Example:
 
-    (new ISOCodes)->continents()->toArray();
+```php
+(new ISOCodes)->continents()->toArray();
+```
 
 
 ### Currency model
@@ -223,8 +250,9 @@ Get the list grouped by currency.
 
 Example:
 
-    (new ISOCodes)->currencies()->toArray();
-
+```php
+(new ISOCodes)->currencies()->toArray();
+```
 
 ### CurrencyNumber model
 
@@ -232,8 +260,9 @@ Get the list grouped by currency number.
 
 Example:
 
-    (new ISOCodes)->currencyNumbers()->toArray();
-
+```php
+(new ISOCodes)->currencyNumbers()->toArray();
+```
 
 ### Property access
 
@@ -241,15 +270,17 @@ Each record array member can be accessed using the array and object syntax.
 
 Example:
 
-    $spain = (new ISOCodes)
-        ->countries()
-        ->findByAlpha2('ES');
+```php
+$spain = (new ISOCodes)
+    ->countries()
+    ->findByAlpha2('ES');
 
-    $spain->name;    // Spain
-    $spain['name'];  // Spain
+$spain->name;    // Spain
+$spain['name'];  // Spain
 
-    $spain->toArray();  // Get record as array
-    $spain->toJson();   // Get record as Json
+$spain->toArray();  // Get record as array
+$spain->toJson();   // Get record as Json
+```
 
 Each record is serializable, that it make it ideal in order to store the results into a cache.
 
@@ -260,10 +291,12 @@ The method `setCurrencyAsNumber` specify if the currency code is returned as a n
 
 Example:
 
-    (new ISOCodes)
-        ->countries()
-        ->setCurrencyAsNumber(true)
-        ->all();
+```php
+(new ISOCodes)
+    ->countries()
+    ->setCurrencyAsNumber(true)
+    ->all();
+```
 
 
 ### Node resolution
@@ -283,13 +316,15 @@ The available node formats are:
 
 Examples:
 
-    (new ISOCodes)
-        ->countries()
-        ->setResolution('currencies', CountryModel::NODE_AS_ALL)
-        ->setResolution('languages', CountryModel::NODE_AS_NAME)
-        ->setResolution('continents', CountryModel::NODE_AS_NONE)
-        ->findByAlpha2('PT')
-        ->toArray();
+```php
+(new ISOCodes)
+    ->countries()
+    ->setResolution('currencies', CountryModel::NODE_AS_ALL)
+    ->setResolution('languages', CountryModel::NODE_AS_NAME)
+    ->setResolution('continents', CountryModel::NODE_AS_NONE)
+    ->findByAlpha2('PT')
+    ->toArray();
+```
 
 returns the following:
 
@@ -344,7 +379,9 @@ It's possible to register custom datasets and locales during the ISOCodes instan
 
 Example:
 
-    new ISOCodes(['countries' => MyCountryTranslation::class])
+```php
+new ISOCodes(['countries' => MyCountryTranslation::class])
+```
 
 See the following example with the [country names](./src/Data/Countries/CountriesEN.php).
 
@@ -355,11 +392,13 @@ The models are macroable so it's possible to inject custom methods.
 
 Example:
 
-    \Juanparati\ISOCodes\Models\CountryModel::macro('allEUMembers', function () {
-        return $this->where('eu_member', true)->all();
-    });
+```php
+\Juanparati\ISOCodes\Models\CountryModel::macro('allEUMembers', function () {
+    return $this->where('eu_member', true)->all();
+});
 
-    (new ISOCodes)->countries()->allEUMembers()->count();   // 27
+(new ISOCodes)->countries()->allEUMembers()->count();   // 27
+```
 
 ## Contributions
 
