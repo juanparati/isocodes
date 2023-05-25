@@ -25,7 +25,12 @@ class ISOCodesProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../../config/isocodes.php', 'isocodes');
 
         $this->app->singleton(ISOCodes::class, function () {
-            return new ISOCodes($this->app['config']['isocodes']['datasets'] ?? []);
+            $config = $this->app['config']['isocodes'] ?? [];
+            return new ISOCodes(
+                $config['datasets'] ?? [],
+                $config['resolutions'] ?? [],
+                $config['options'] ?? []
+            );
         });
     }
 }

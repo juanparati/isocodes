@@ -3,7 +3,7 @@
     "description": "A PHP library that provides ISO codes for countries, currencies and languages.",
     "type": "library",
     "require": {
-        "php": "^8.0",
+        "php": "^8.1",
         "ext-ctype": "*",
         "illuminate/support": "^8.34.0|~v9.0|~v10.0"
     },

@@ -53,7 +53,7 @@ Publish configuration file (Required only when custom dataset or locales are req
 
 The list of results are returned as [Collections](https://laravel.com/docs/9.x/collections).
 
-### Country model
+### Country model examples
 
 Get the list of all country codes as an array:
 
@@ -191,11 +191,10 @@ Retrieve a list of countries that has Portuguese as one of their official langua
     ->whereLanguage('PT');
 ```
 
-* Note that most spoken language should be always the first in the list.
+* Note that most spoken language of each country should be always the first in the list.
 
 
-### Language model
-
+### Language model examples
 Get the list grouped by language:
 
 ```php
@@ -233,7 +232,7 @@ It returns something like:
     ];
 
 
-### Continent model
+### Continent model examples
 
 Get the list grouped by continent.
 
@@ -244,7 +243,7 @@ Example:
 ```
 
 
-### Currency model
+### Currency model examples
 
 Get the list grouped by currency.
 
@@ -254,7 +253,7 @@ Example:
 (new ISOCodes)->currencies()->toArray();
 ```
 
-### CurrencyNumber model
+### CurrencyNumber model examples
 
 Get the list grouped by currency number.
 
@@ -319,9 +318,9 @@ Examples:
 ```php
 (new ISOCodes)
     ->countries()
-    ->setResolution('currencies', CountryModel::NODE_AS_ALL)
-    ->setResolution('languages', CountryModel::NODE_AS_NAME)
-    ->setResolution('continents', CountryModel::NODE_AS_NONE)
+    ->setResolution('currencies', \Juanparati\ISOCodes\Enums\NodeResolution::NODE_AS_ALL)
+    ->setResolution('languages', \Juanparati\ISOCodes\Enums\NodeResolution::NODE_AS_ALL)
+    ->setResolution('continents', \Juanparati\ISOCodes\Enums\NodeResolution::NODE_AS_ALL)
     ->findByAlpha2('PT')
     ->toArray();
 ```
@@ -371,6 +370,31 @@ instead of:
 
 The node resolutions works with the others models like "currencies", "languages", etc.
 
+#### Node resolutions and immutability
+
+When the resolution is changed it will be back to the previous state in the next model call.
+
+Example:
+
+```php
+$iso = new ISOCodes();
+
+echo $iso->countries()
+    ->setResolution('currencies', \Juanparati\ISOCodes\Enums\NodeResolution::NODE_AS_ALL)
+    ->findByAlpha2('PT')
+    ->currencies[0];  // Returns "Euro"
+
+echo $iso->countries()
+    ->findByAlpha2('PT')
+    ->currencies[0];  // Returns "EUR"
+```
+In order to keep persistent the resolutions it's possible to pass the resolution values to the constructor. Example:
+
+```php
+$iso = new ISOCodes(new ISOCodes(defaultResolutions: [
+            'currencies' =>  \Juanparati\ISOCodes\Enums\NodeResolution::NODE_AS_NAME
+        ]);
+```
 
 ## Custom dataset and locales
 

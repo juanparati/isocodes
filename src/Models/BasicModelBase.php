@@ -4,8 +4,10 @@ namespace Juanparati\ISOCodes\Models;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Traits\Macroable;
+use Juanparati\ISOCodes\Enums\NodeResolution;
 use Juanparati\ISOCodes\Exceptions\ISONodeAttributeMissing;
 use Juanparati\ISOCodes\ISOCodes;
+use SebastianBergmann\CodeCoverage\Report\Xml\Node;
 
 /**
  * Base class used by the models.
@@ -15,24 +17,16 @@ abstract class BasicModelBase
 
     use Macroable;
 
-    /**
-     * Subnode resolution formats.
-     */
-    public const NODE_AS_CODE      = 'code';
-    public const NODE_AS_NAME      = 'name';
-    public const NODE_AS_ALL       = 'all';
-    public const NODE_AS_NONE      = 'none';
-
 
     /**
      * Define node resolution formats.
      *
-     * @var array
+     * @var NodeResolution[]
      */
     protected array $nodeResolution = [
-        'currencies'  => self::NODE_AS_CODE,
-        'continents'  => self::NODE_AS_CODE,
-        'languages'   => self::NODE_AS_CODE,
+        'currencies'  => NodeResolution::NODE_AS_CODE,
+        'continents'  => NodeResolution::NODE_AS_CODE,
+        'languages'   => NodeResolution::NODE_AS_CODE,
     ];
 
 
@@ -79,11 +73,11 @@ abstract class BasicModelBase
      * Set the node resolution.
      *
      * @param string $node
-     * @param string $format
+     * @param NodeResolution $format
      * @return $this
      * @throws ISONodeAttributeMissing
      */
-    public function setResolution(string $node, string $format = self::NODE_AS_CODE): static
+    public function setResolution(string $node, NodeResolution $format = NodeResolution::NODE_AS_CODE): static
     {
         if (!isset($this->nodeResolution[$node])) {
             throw new ISONodeAttributeMissing('Node attribute is missing');
@@ -123,6 +117,17 @@ abstract class BasicModelBase
 
 
     /**
+     * Clone current model.
+     *
+     * @return $this
+     */
+    public function clone() : static
+    {
+        return clone $this;
+    }
+
+
+    /**
      * Resolve node data.
      *
      * @param string $node
@@ -135,16 +140,16 @@ abstract class BasicModelBase
         Collection $modelData,
         array $codes,
     ): ?array {
-        if ($this->nodeResolution[$node] === self::NODE_AS_NONE) {
+        if ($this->nodeResolution[$node] === NodeResolution::NODE_AS_NONE) {
             return null;
         }
 
         $list = [];
 
         foreach ($codes as $code) {
-            if ($this->nodeResolution[$node] === self::NODE_AS_CODE) {
+            if ($this->nodeResolution[$node] === NodeResolution::NODE_AS_CODE) {
                 $list[] = $code;
-            } elseif ($this->nodeResolution[$node] === self::NODE_AS_NAME) {
+            } elseif ($this->nodeResolution[$node] === NodeResolution::NODE_AS_NAME) {
                 $list[] = $modelData[$code] ?? null;
             } else {
                 $list[$code] = $modelData[$code] ?? null;

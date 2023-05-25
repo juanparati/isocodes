@@ -20,4 +20,28 @@ return [
         'continents'     => \Juanparati\ISOCodes\Data\Continents\ContinentsEN::class,
     ],
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | Default resolutions
+    |--------------------------------------------------------------------------
+    |
+    */
+    'resolutions' => [
+        'currencies'  => \Juanparati\ISOCodes\Enums\NodeResolution::NODE_AS_CODE,
+        'continents'  => \Juanparati\ISOCodes\Enums\NodeResolution::NODE_AS_CODE,
+        'languages'   => \Juanparati\ISOCodes\Enums\NodeResolution::NODE_AS_CODE,
+    ],
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Additional options
+    |--------------------------------------------------------------------------
+    |
+    */
+    'options' => [
+        'currencyAsNumber' => false   // Specify if the currency code is returned as a number.
+    ],
+
 ];
