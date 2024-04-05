@@ -7,7 +7,6 @@ use Illuminate\Support\Traits\Macroable;
 use Juanparati\ISOCodes\Enums\NodeResolution;
 use Juanparati\ISOCodes\Exceptions\ISONodeAttributeMissing;
 use Juanparati\ISOCodes\ISOCodes;
-use SebastianBergmann\CodeCoverage\Report\Xml\Node;
 
 /**
  * Base class used by the models.
