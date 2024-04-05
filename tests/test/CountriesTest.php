@@ -3,6 +3,7 @@
 namespace Juanparati\ISOCodes\Tests\test;
 
 use Illuminate\Support\Collection;
+use Juanparati\ISOCodes\Enums\NodeResolution;
 use Juanparati\ISOCodes\ISOCodes;
 use Juanparati\ISOCodes\Models\CountryModel;
 use Juanparati\ISOCodes\Models\ModelRecord;
@@ -95,25 +96,25 @@ class CountriesTest extends TestCase
         $this->assertCountry($this->testNodeCode + $this->testCountry, $country);
 
         $country = $iso->countries()
-            ->setResolution('currencies', CountryModel::NODE_AS_ALL)
-            ->setResolution('continents', CountryModel::NODE_AS_ALL)
-            ->setResolution('languages' , CountryModel::NODE_AS_ALL)
+            ->setResolution('currencies', NodeResolution::NODE_AS_ALL)
+            ->setResolution('continents', NodeResolution::NODE_AS_ALL)
+            ->setResolution('languages' , NodeResolution::NODE_AS_ALL)
             ->findByAlpha2('es');
 
         $this->assertCountry($this->testNodeAll + $this->testCountry, $country);
 
         $country = $iso->countries()
-            ->setResolution('currencies', CountryModel::NODE_AS_NAME)
-            ->setResolution('continents', CountryModel::NODE_AS_NAME)
-            ->setResolution('languages' , CountryModel::NODE_AS_NAME)
+            ->setResolution('currencies', NodeResolution::NODE_AS_NAME)
+            ->setResolution('continents', NodeResolution::NODE_AS_NAME)
+            ->setResolution('languages' , NodeResolution::NODE_AS_NAME)
             ->findByAlpha2('es');
 
         $this->assertCountry($this->testNodeName + $this->testCountry, $country);
 
         $country = $iso->countries()
-            ->setResolution('currencies', CountryModel::NODE_AS_NONE)
-            ->setResolution('continents', CountryModel::NODE_AS_NONE)
-            ->setResolution('languages' , CountryModel::NODE_AS_NONE)
+            ->setResolution('currencies', NodeResolution::NODE_AS_NONE)
+            ->setResolution('continents', NodeResolution::NODE_AS_NONE)
+            ->setResolution('languages' , NodeResolution::NODE_AS_NONE)
             ->findByAlpha2('es');
 
         $this->assertArrayNotHasKey('countries', $country);
@@ -194,7 +195,7 @@ class CountriesTest extends TestCase
 
         $country = $iso->countries()
             ->setCurrencyAsNumber(true)
-            ->setResolution('currencies', CountryModel::NODE_AS_ALL)
+            ->setResolution('currencies', NodeResolution::NODE_AS_ALL)
             ->findByAlpha2('es');
 
         $this->assertEquals($country['currencies'], ['978' => 'Euro']);

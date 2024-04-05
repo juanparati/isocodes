@@ -5,6 +5,7 @@ namespace Juanparati\ISOCodes\Models;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Juanparati\ISOCodes\Contracts\ISOModelContract;
+use Juanparati\ISOCodes\Enums\NodeResolution;
 use Juanparati\ISOCodes\Models\Extensions\CollectionMethodCallable;
 use Juanparati\ISOCodes\Models\Extensions\NodeSearchable;
 
@@ -171,8 +172,8 @@ class CountryModel extends BasicModelBase implements ISOModelContract
                     } else {
                         if ($this->options['currencyAsNumber'] && $nodeName === 'currencies') {
                             $data = match ($this->nodeResolution['currencies']) {
-                                static::NODE_AS_CODE => array_map(fn ($cur) => (string) $currencyNumbers[$cur], $data),
-                                static::NODE_AS_ALL  => collect($data)->mapWithKeys(fn ($name, $cur) => [(string) $currencyNumbers[$cur] => $name])->toArray(),
+                                NodeResolution::NODE_AS_CODE => array_map(fn ($cur) => (string) $currencyNumbers[$cur], $data),
+                                NodeResolution::NODE_AS_ALL  => collect($data)->mapWithKeys(fn ($name, $cur) => [(string) $currencyNumbers[$cur] => $name])->toArray(),
                             };
                         }
 

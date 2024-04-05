@@ -5,6 +5,7 @@ namespace Juanparati\ISOCodes;
 use Illuminate\Support\Pluralizer;
 use Juanparati\ISOCodes\Contracts\ISODataContract;
 use Juanparati\ISOCodes\Contracts\ISOModelContract;
+use Juanparati\ISOCodes\Enums\NodeResolution;
 use Juanparati\ISOCodes\Exceptions\ISOModelNotFound;
 
 /**
@@ -34,6 +35,28 @@ class ISOCodes
 
 
     /**
+     * Default resolutions.
+     *
+     * @var array
+     */
+    protected array $defaultResolutions = [
+        'currencies'  => NodeResolution::NODE_AS_CODE,
+        'continents'  => NodeResolution::NODE_AS_CODE,
+        'languages'   => NodeResolution::NODE_AS_CODE,
+    ];
+
+
+    /**
+     * Default options.
+     *
+     * @var array|false[]
+     */
+    protected array $defaultOptions = [
+        'currencyAsNumber' => false
+    ];
+
+
+    /**
      * Loaded models.
      *
      * @var ISOModelContract[]
@@ -53,10 +76,18 @@ class ISOCodes
      * Constructor.
      *
      * @param array $datasets
+     * @param array $defaultResolutions
+     * @param array $defaultOptions
      */
-    public function __construct(array $datasets = [])
+    public function __construct(
+        array $datasets = [],
+        array $defaultResolutions = [],
+        array $defaultOptions = [],
+    )
     {
         $this->datasets = array_merge($this->datasets, $datasets);
+        $this->defaultResolutions = array_merge($this->defaultResolutions, $defaultResolutions);
+        $this->defaultOptions = array_merge($this->defaultOptions, $defaultOptions);
     }
 
 
@@ -80,7 +111,13 @@ class ISOCodes
             }
         }
 
-        return $this->modelInstances[$model];
+
+        foreach ($this->defaultResolutions as $node => $resolution) {
+            $this->modelInstances[$model]->setResolution($node, $resolution);
+        }
+
+        return $this->modelInstances[$model]
+            ->setCurrencyAsNumber($this->defaultOptions['currencyAsNumber'] ?? false);
     }
 
 
