@@ -12,6 +12,7 @@ This library provides the following ISOs and codes:
 - [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) (Currency codes)
 - [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (Language codes)
 - [International dialing codes](https://en.wikipedia.org/wiki/List_of_country_calling_codes)
+- [Olson Timezones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
 - [Unicode flags](https://en.wikipedia.org/wiki/Regional_indicator_symbol)
 - [European Union Members](https://european-union.europa.eu/principles-countries-history/country-profiles_en)
 
@@ -64,24 +65,32 @@ It returns something like this:
     [
     ...
         "AL"=> [
-            "alpha2"     => "AL",
-            "alpha3"     => "ALB",
-            "numeric"    => "008",
-            "tld"        => ".al",
+            "alpha2" => "ES",
+            "alpha3" => "ESP",
+            "numeric" => "724",
+            "tld" => ".es",
             "currencies" => [
-                'ALL'
+              "EUR",
             ],
-            "languages"  => [
-                "SQ",
+            "languages" => [
+              "ES",
+              "CA",
+              "GL",
+              "EU",
             ],
             "continents" => [
-                "EU",
+              "EU",
             ],
-            "name"       => "Albania",
-            "capital"    => "Tirana",
-            "flag"       => "🇦🇱",
-            "phone_code" => "355",
-            "eu_member"  => false
+            "capital" => "Madrid",
+            "flag" => "🇪🇸",
+            "phone_code" => "34",
+            "eu_member" => true,
+            "name" => "Spain",
+            "timezones" => [
+                "Europe/Madrid",
+                "Africa/Ceuta",
+                "Atlantic/Canary",
+            ]
         ]
     ...
     ];
@@ -218,6 +227,9 @@ It returns something like:
                     "languages"  => [ …1],
                     "continents" => [ …1],
                     "name"       => "Andorra",
+                    "timezones"  => [
+                        "Europe/Andorra"
+                    ]
                 ],
                 ...
             ],
@@ -342,7 +354,12 @@ returns the following:
         "capital"    => "Lisboa",
         "flag"       => "🇵🇹",
         "phone_code" => "351",
-        "eu_member"  => true
+        "eu_member"  => true,
+        "timezones"  => [
+            "Europe/Lisbon",
+            "Atlantic/Azores",
+            "Atlantic/Madeira",
+        ],
     ]
 
 instead of:
@@ -365,7 +382,12 @@ instead of:
         "capital"    => "Lisboa",
         "flag"       => "🇵🇹",
         "phone_code" => "351",
-        "eu_member"  => true
+        "eu_member"  => true,
+        "timezones"  => [
+            "Europe/Lisbon",
+            "Atlantic/Azores",
+            "Atlantic/Madeira",
+        ],
     ]
 
 The node resolutions works with the others models like "currencies", "languages", etc.
@@ -395,6 +417,12 @@ $iso = new ISOCodes(new ISOCodes(defaultResolutions: [
             'currencies' =>  \Juanparati\ISOCodes\Enums\NodeResolution::NODE_AS_NAME
         ]);
 ```
+
+## Main language and timezone
+
+- The more spoken language is displayed first in the list.
+- The country capital timezone is displayed first in the list.
+
 
 ## Custom dataset and locales
 
