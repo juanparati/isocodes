@@ -3,9 +3,9 @@
 namespace Juanparati\ISOCodes\Tests\test;
 
 use Illuminate\Support\Collection;
+use Juanparati\ISOCodes\Data\Countries\CountryCodes;
 use Juanparati\ISOCodes\Enums\NodeResolution;
 use Juanparati\ISOCodes\ISOCodes;
-use Juanparati\ISOCodes\Models\CountryModel;
 use Juanparati\ISOCodes\Models\ModelRecord;
 use PHPUnit\Framework\TestCase;
 
@@ -18,6 +18,11 @@ class CountriesTest extends TestCase
         'alpha3'     => 'ESP',
         'numeric'    => '724',
         'tld'        => '.es',
+        'timezones'  => [
+            'Europe/Madrid',
+            'Africa/Ceuta',
+            'Atlantic/Canary'
+        ]
     ];
 
     protected array $testNodeCode = [
@@ -78,6 +83,7 @@ class CountriesTest extends TestCase
             $this->assertArrayHasKey('currencies', $country);
             $this->assertArrayHasKey('continents', $country);
             $this->assertArrayHasKey('name', $country);
+            $this->assertArrayHasKey('timezones', $country);
         }
     }
 
@@ -202,8 +208,33 @@ class CountriesTest extends TestCase
     }
 
 
+    /**
+     * Test continent search.
+     *
+     * @return void
+     */
     public function testContinentSearch() {
         $this->assertCount(2, (new ISOCodes())->countries()->whereContinent(['AS', 'EU'], true));
+    }
+
+
+    /**
+     * Test that main timezones are correct.
+     *
+     * @return void
+     */
+    public function testMainTimezone() {
+        $iso = new ISOCodes();
+        $countryCodes = new CountryCodes();
+
+        $reflectedClass = new \ReflectionClass($countryCodes);
+        $reflection = $reflectedClass->getProperty('mainTimezones');
+        $mainTimezones = $reflection->getValue($countryCodes);
+
+        foreach ($mainTimezones as $alpha2 => $timezone) {
+            $timezones = $iso->countries()->findByAlpha2($alpha2)->timezones;
+            $this->assertEquals($timezone, $timezones[0]);
+        }
     }
 
 
