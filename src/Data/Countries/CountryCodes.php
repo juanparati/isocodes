@@ -2,6 +2,7 @@
 
 namespace Juanparati\ISOCodes\Data\Countries;
 
+use Illuminate\Support\Arr;
 use Juanparati\ISOCodes\Data\ISODataBase;
 
 /**
@@ -3243,4 +3244,77 @@ class CountryCodes extends ISODataBase
             'eu_member'  => false,
         ],
     ];
+
+
+    /**
+     * Contains the capital timezones (or compatible) for countries that has more than 1 timezone.
+     * In case of autonomous regions it contains the most compatible timezone.
+     *
+     * @var array|string[]
+     */
+    protected array $mainTimezones = [
+        'AR' => 'America/Argentina/Buenos_Aires',
+        'AU' => 'Australia/Sydney',
+        'BV' => 'Africa/Johannesburg',
+        'CA' => 'America/Toronto',
+        'CD' => 'Africa/Kinshasa',
+        'CL' => 'America/Santiago',
+        'CN' => 'Asia/Shanghai',
+        'EC' => 'America/Guayaquil',
+        'ES' => 'Europe/Madrid',
+        'FM' => 'Pacific/Chuuk',
+        'GL' => 'America/Godthab',
+        'HM' => 'Australia/Perth',
+        'ID' => 'Asia/Jakarta',
+        'KI' => 'Pacific/Tarawa',
+        'KZ' => 'Asia/Almaty',
+        'MH' => 'Pacific/Majuro',
+        'MN' => 'Asia/Ulaanbaatar',
+        'MX' => 'America/Mexico_City',
+        'MY' => 'Asia/Kuala_Lumpur',
+        'NZ' => 'Pacific/Auckland',
+        'PF' => 'Pacific/Tahiti',
+        'PG' => 'Pacific/Port_Moresby',
+        'PS' => 'Asia/Gaza',
+        'PT' => 'Europe/Lisbon',
+        'RU' => 'Europe/Moscow',
+        'TF' => 'Indian/Kerguelen',
+        'UA' => 'Europe/Kiev',
+        'UM' => 'Pacific/Midway',
+        'US' => 'America/New_York',
+        'UZ' => 'Asia/Samarkand',
+    ];
+
+
+    /**
+     * Retrieve all the elements from the database.
+     *
+     * @return array
+     */
+    public function all(): array
+    {
+        // Populate timezones.
+        // PHP already has the different timezones, so it's not required to create a complete list of timezones.
+        return Arr::map(
+            $this->db,
+            function (array $data, string $alpha2) {
+                $zones = \DateTimeZone::listIdentifiers(\DateTimeZone::PER_COUNTRY, $alpha2);
+
+                if ($this->mainTimezones[$alpha2] ?? null) {
+
+                    if (count($zones)) {
+                        $zones = array_filter($zones, fn($zone) => $zone !== $this->mainTimezones[$alpha2]);
+                        array_unshift($zones, $this->mainTimezones[$alpha2]);
+                    } else {
+                        $zones = [$this->mainTimezones[$alpha2]];
+                    }
+                }
+
+                $data['timezones'] = $zones;
+
+                return $data;
+            }
+        );
+
+    }
 }
