@@ -64,7 +64,7 @@ It returns something like this:
 
     [
     ...
-        "AL"=> [
+        "ES"=> [
             "alpha2" => "ES",
             "alpha3" => "ESP",
             "numeric" => "724",
