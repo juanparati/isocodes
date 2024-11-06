@@ -1,6 +1,6 @@
 {
     "name": "juanparati/iso-codes",
-    "description": "A PHP library that provides ISO codes for countries, currencies and languages.",
+    "description": "A PHP library that provides ISO codes, currencies, languages, timezones and additional geopolitical information",
     "keywords": [
         "laravel",
         "iso",
@@ -10,6 +10,7 @@
         "regions",
         "languages",
         "currencies",
+        "timezones",
         "flags"
     ],
     "type": "library",
