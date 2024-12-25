@@ -11,11 +11,11 @@ use Juanparati\ISOCodes\Exceptions\ISOModelNotFound;
 /**
  * Provide the main ISOCodes objects.
  *
- * @method \Juanparati\ISOCodes\Models\ContinentModel continents
- * @method \Juanparati\ISOCodes\Models\CountryModel countries
- * @method \Juanparati\ISOCodes\Models\CurrencyModel currencies
- * @method \Juanparati\ISOCodes\Models\CurrencyNumberModel currencyNumbers
- * @method \Juanparati\ISOCodes\Models\LanguageModel languages
+ * @method \Juanparati\ISOCodes\Models\ContinentModel continents()
+ * @method \Juanparati\ISOCodes\Models\CountryModel countries()
+ * @method \Juanparati\ISOCodes\Models\CurrencyModel currencies()
+ * @method \Juanparati\ISOCodes\Models\CurrencyNumberModel currencyNumbers()
+ * @method \Juanparati\ISOCodes\Models\LanguageModel languages()
  */
 class ISOCodes
 {
