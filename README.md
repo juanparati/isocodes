@@ -452,6 +452,10 @@ Example:
 (new ISOCodes)->countries()->allEUMembers()->count();   // 27
 ```
 
+## Flags representation in client side
+
+Some operating systems and web browsers may not be able to represent unicode flags due political reasons. I recommend to use the libraries like [country-flag-emoji-polyfill](https://github.com/talkjs/country-flag-emoji-polyfill) in order to provide a graphical representation of the flags in the client side.
+
 ## Contributions
 
 Feel free to add new locales to this library and send me a pull request.
