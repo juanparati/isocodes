@@ -1,3 +1,5 @@
+![Test passed](https://github.com/juanparati/isocodes/actions/workflows/phpunit.yml/badge.svg)
+
 # 🌐 ISOCodes
 
 ## What is it?
