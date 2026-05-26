@@ -41,7 +41,6 @@ class CurrencyNumbers extends ISODataBase
         'NOK' => '578',
         'BRL' => '986',
         'BND' => '96',
-        'BGN' => '975',
         'BIF' => '108',
         'CVE' => '132',
         'KHR' => '116',
