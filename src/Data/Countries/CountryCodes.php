@@ -452,7 +452,7 @@ class CountryCodes extends ISODataBase
             'alpha3'     => 'BGR',
             'numeric'    => '100',
             'tld'        => '.bg',
-            'currencies' => ['BGN',],
+            'currencies' => ['EUR',],
             'languages'  => ['BG'],
             'continents' => ['EU'],
             'capital'    => 'Sofia',
