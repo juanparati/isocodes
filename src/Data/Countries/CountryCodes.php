@@ -857,7 +857,7 @@ class CountryCodes extends ISODataBase
             'tld'        => '.eg',
             'currencies' => ['EGP',],
             'languages'  => ['AR'],
-            'continents' => ['AS'],
+            'continents' => ['AF'],
             'capital'    => 'Cairo',
             'flag'       => '🇪🇬',
             'phone_code' => '20',
