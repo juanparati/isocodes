@@ -363,7 +363,7 @@ class CountryCodes extends ISODataBase
             'tld'        => '.bq',
             'currencies' => ['USD',],
             'languages'  => ['NL'],
-            'continents' => ['SA'],
+            'continents' => ['NA'],
             'capital'    => 'Kralendijk',
             'flag'       => '🇧🇶',
             'phone_code' => '599-7',
