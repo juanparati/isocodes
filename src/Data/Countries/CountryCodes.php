@@ -870,7 +870,7 @@ class CountryCodes extends ISODataBase
             'tld'        => '.sv',
             'currencies' => ['USD',],
             'languages'  => ['ES'],
-            'continents' => ['SA'],
+            'continents' => ['NA'],
             'capital'    => 'San Salvador',
             'flag'       => '🇸🇻',
             'phone_code' => '503',
