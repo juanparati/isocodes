@@ -584,7 +584,7 @@ class CountryCodes extends ISODataBase
             'tld'        => '.cl',
             'currencies' => ['CLP',],
             'languages'  => ['ES'],
-            'continents' => ['NA'],
+            'continents' => ['SA'],
             'capital'    => 'Santiago',
             'flag'       => '🇨🇱',
             'phone_code' => '56',
