@@ -13,7 +13,7 @@ class ContinentsEN extends ISODataBase
 {
     protected array $db = [
         'AF' => 'Africa',
-        'AN' => 'Antartica',
+        'AN' => 'Antarctica',
         'AS' => 'Asia',
         'EU' => 'Europe',
         'NA' => 'North America',
