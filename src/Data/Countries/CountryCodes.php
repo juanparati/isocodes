@@ -274,8 +274,8 @@ class CountryCodes extends ISODataBase
             'languages'  => ['BE', 'RU'],
             'continents' => ['EU'],
             'capital'    => 'Minsk',
-            'flag'       => '🇱🇾',
-            'phone_code' => '218',
+            'flag'       => '🇧🇾',
+            'phone_code' => '375',
             'eu_member'  => false,
         ],
         'BE' => [
