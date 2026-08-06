@@ -216,7 +216,7 @@ class CountriesTest extends TestCase
      * @return void
      */
     public function testContinentSearch() {
-        $this->assertCount(3, (new ISOCodes())->countries()->whereContinent(['AS', 'EU'], true));
+        $this->assertCount(4, (new ISOCodes())->countries()->whereContinent(['AS', 'EU'], true));
     }
 
 
