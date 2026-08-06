@@ -64,39 +64,41 @@ Get the list of all country codes as an array:
 
 It returns something like this:
 
-    [
+```
+[
     ...
-        "ES"=> [
-            "alpha2" => "ES",
-            "alpha3" => "ESP",
-            "numeric" => "724",
-            "tld" => ".es",
-            "currencies" => [
-              "EUR",
-            ],
-            "languages" => [
-              "ES",
-              "CA",
-              "GL",
-              "EU",
-            ],
-            "continents" => [
-              "EU",
-            ],
-            "capital" => "Madrid",
-            "flag" => "🇪🇸",
-            "phone_code" => "34",
-            "eu_member" => true,
-            "name" => "Spain",
-            "timezones" => [
-                "Europe/Madrid",
-                "Africa/Ceuta",
-                "Atlantic/Canary",
-            ]
+    "ES"=> [
+        "alpha2" => "ES",
+        "alpha3" => "ESP",
+        "numeric" => "724",
+        "tld" => ".es",
+        "currencies" => [
+          "EUR",          // The first currency in the list is the main country currency
+        ],
+        "languages" => [
+          "ES",           // The first language in the list is the main country language
+          "CA",
+          "GL",
+          "EU",
+        ],
+        "continents" => [
+          "EU",           // The first continent in the list is the continent where the capital is located
+          "AF",
+        ],
+        "capital" => "Madrid",
+        "flag" => "🇪🇸",
+        "phone_code" => "34",
+        "eu_member" => true,
+        "name" => "Spain",
+        "timezones" => [
+            "Europe/Madrid",
+            "Africa/Ceuta",
+            "Atlantic/Canary",
         ]
+    ]
     ...
-    ];
-
+];
+```
 
 Retrieve all the countries as a Collection:
 
