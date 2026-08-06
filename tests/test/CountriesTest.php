@@ -28,7 +28,7 @@ class CountriesTest extends TestCase
     protected array $testNodeCode = [
         'currencies' => ['EUR'],
         'languages'  => ['ES', 'CA', 'GL', 'EU'],
-        'continents' => ['EU'],
+        'continents' => ['EU', 'AF'],
     ];
 
     protected array $testNodeAll = [
@@ -42,7 +42,8 @@ class CountriesTest extends TestCase
             'EU' => 'Basque'
         ],
         'continents' => [
-            'EU' => 'Europe'
+            'EU' => 'Europe',
+            'AF' => 'Africa',
         ]
     ];
 
@@ -57,7 +58,8 @@ class CountriesTest extends TestCase
             'Basque'
         ],
         'continents' => [
-            'Europe'
+            'Europe',
+            'Africa',
         ]
     ];
 
@@ -214,7 +216,7 @@ class CountriesTest extends TestCase
      * @return void
      */
     public function testContinentSearch() {
-        $this->assertCount(2, (new ISOCodes())->countries()->whereContinent(['AS', 'EU'], true));
+        $this->assertCount(4, (new ISOCodes())->countries()->whereContinent(['AS', 'EU'], true));
     }
 
 

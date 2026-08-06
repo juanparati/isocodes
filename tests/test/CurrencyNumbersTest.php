@@ -15,7 +15,7 @@ class CurrencyNumbersTest extends TestCase
         $this->assertGreaterThan(100, $cont->count());
 
         foreach ($cont as $group) {
-            $this->assertTrue(ctype_digit($group['code']));
+            $this->assertTrue(ctype_digit($group['code']), 'Code missing: ' . json_encode($group));
             $this->assertFalse(ctype_digit($group['name']));
         }
     }
